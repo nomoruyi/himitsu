@@ -8,13 +8,20 @@ class User extends HiveObject with EquatableMixin {
   @HiveField(0)
   int? id;
   @HiveField(1)
-  String? username;
+  late String username;
   @HiveField(3)
   String? profilePic;
   @HiveField(4)
   String? sessionID;
 
-  User({this.id, this.username, this.sessionID});
+  User({this.id, required this.username, this.profilePic, this.sessionID});
+
+  User.fromMap(Map data) {
+    id = data['id'];
+    username = data['username'];
+    profilePic = data['profilePic'];
+    sessionID = data['sessionID'];
+  }
 
   @override
   List<Object?> get props => [id, username];
