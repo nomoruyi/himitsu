@@ -1,0 +1,186 @@
+{
+  "misc": {
+    "notifications": "Notifications",
+    "searchHint": "Persons/Boxes/Items",
+    "next": "Next",
+    "warning": "WARNING",
+    "menu": {
+      "logout": "Logout",
+      "settings": "Settings",
+      "finishTour": "Finish tour"
+    }
+
+  },
+  "settings": {
+    "": "Settings",
+    "general": {
+      "": "General",
+      "language": {
+        "": "Language",
+        "german": "German",
+        "english": "English"
+      },
+      "size": {
+        "": "Font size",
+        "small": "Small",
+        "normal": "Normal",
+        "large": "Large"
+      },
+      "theme": {
+        "": "Theme",
+        "light": "Light",
+        "dark": "Dark",
+        "useSystemTheme": "Use system theme"
+
+      }
+    },
+
+    "info":{
+      "": "Info",
+      "status": {
+        "": "Status",
+        "client": "Client",
+        "user": {
+          "": "User",
+          "notLoggedIn": "Not yet logged in"
+        },
+        "license": "License key",
+        "removeLicense": "Remove license",
+        "tracking": {
+          "": "Tracking",
+          "active": "Enabled",
+          "inactive": "Disabled"
+        },
+        "deviceID": "Device ID",
+        "deviceName": "Device Name",
+
+        "server": "Server",
+        "serverStatus": {
+          "": "Server status",
+          "available": "Available",
+          "maintenance": "Under maintenance",
+          "unavailable": "Unavailable"
+        }
+      },
+      "versionsProtocol": {
+        "": "Versions protocol"
+      },
+      "userData": {
+        "": "User data"
+      },
+      "imprint": {
+        "": "Imprint"
+      }
+    },
+
+    "appInfo": {
+      "": "App Information"
+    }
+
+  },
+  "tour": {
+    "": "Tour",
+    "deliveryDate": "Date",
+    "loadUp": "Load up",
+    "unload": "Unload",
+    "deliver": "Deliver",
+    "start": "Start",
+    "end": "End",
+    "reverseDeliver": "revert delivery",
+    "selection": {
+      "header": "Please select a tour"
+    },
+    "driverNote": {
+      "": "Driver Note",
+      "content": "WARNING: This note is only for the driver of the current tour and will not be submitted to the backoffice"
+    },
+    "deliveryNote": "Delivery Note",
+    "mileage":"Mileage",
+    "time": "Time"
+  },
+  "station": {
+    "": "Station"
+  },
+  "auth": {
+    "login": {
+      "": "Login",
+      "username": "Username",
+      "password": "Password",
+      "proceedWithoutLogin": "Proceed without login",
+      "passwordMissing": "Password missing",
+      "usernameMissing": "Username missing"
+
+    },
+    "logout": {
+      "": "Ausloggen"
+    }
+  },
+  "navigation": {
+    "start": "Start Navigation",
+    "nextDestination": "Next destination"
+  },
+  "driver": {
+    "licensePlate": "License plate"
+  },
+  "button": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "back": "Back",
+    "yes": "Yes",
+    "no": "No",
+    "skip": "Skip",
+    "add": "Add",
+    "downloadAgain": "No, download again",
+    "addNote": "Add note",
+    "edit": "Edit",
+    "remove": "Remove",
+    "sort": "Sort",
+    "listOfArticles": "List of all articles",
+    "addBox": "Add box",
+    "images": "Images",
+    "deposit": "Deposit"
+  },
+  "popup": {
+    "warning": "Warning!",
+    "save": "Save changes?",
+    "delivery": {
+      "": "Delivery done?",
+      "content": "WARNING: Do not confirm this window until the delivery has arrived at the customer"
+    },
+    "notifications": {
+      "": "Notifications",
+      "driverNote": "Driver note",
+      "tourNote": "Auf der Tour beachten",
+      "companyNote": "Tour note"
+    },
+    "logout":{
+      "content":  "Do you really want to logout?"
+    },
+    "tour": {
+      "content": "Do you want to abort this tour?",
+      "alreadyAvailable": "This tour is already available on this device! Skip re-download?",
+      "download": "Do you want to download this tour?"
+    },
+    "sort": {
+      "cancel": "Cancel sorting?"
+    },
+    "addBox": "Add new box",
+    "allArticle": "All articles of this delivery",
+    "images": "Images"
+  },
+  "error": {
+    "usernameOrPasswordMissing": "Username or password are missing",
+    "invalidPasswordOrUsername": "Username or password wrong",
+    "http": {
+      "": "Unknown network error",
+      "3xx": "Some requirements are missing to complete the request",
+      "4xx": "The request is invalid or un-authorized",
+      "5xx": "The server is unavailable at the time or unable to process the request",
+      "missingToken": "The token for the current session is missing"
+    },
+    "emptyText": "Please fill in the text field!",
+    "invalidValue": "Please enter a valid value!",
+    "endMileageSmallerThanStart": "The mileage can't be smaller than at the start of the tour!"
+
+  }
+}

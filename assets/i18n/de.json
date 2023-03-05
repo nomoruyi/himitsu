@@ -1,0 +1,190 @@
+{
+  "misc": {
+    "notifications": "Nachrichten",
+    "searchHint": "Personen/Kisten/Artikel",
+    "next": "Weiter",
+    "warning": "ACHTUNG",
+    "menu": {
+      "logout": "Ausloggen",
+      "settings": "Einstellungen",
+      "finishTour": "Tour beenden"
+    }
+  },
+  "settings": {
+    "": "Einstellungen",
+    "general": {
+      "": "Allgemeines",
+      "language": {
+        "": "Sprache",
+        "german": "Deutsch",
+        "english": "Englisch"
+      },
+      "size": {
+        "": "Textgröße",
+        "small": "Klein",
+        "normal": "Normal",
+        "large": "Groß"
+      },
+      "theme": {
+        "": "Farbmotiv",
+        "light": "Hell",
+        "dark": "Dunkel",
+        "useSystemTheme": "Systemmotiv\nübernehmen"
+      }
+    },
+
+    "info":{
+      "": "Info",
+      "status": {
+        "": "Status",
+        "client": "Endnutzer",
+        "user": {
+          "": "Nutzer",
+          "notLoggedIn": "Noch nicht angemeldet"
+        },
+        "license": "Lizenz-Schlüssel",
+        "removeLicense": "Lizenz lösen",
+        "tracking": {
+          "": "Standortfreigabe",
+          "active": "Aktiviert",
+          "inactive": "Deaktiviert"
+        },
+        "deviceID": "Geräte-ID",
+        "deviceName": "Geräte Name",
+
+        "server": "Server",
+        "serverStatus": {
+          "": "Serverstatus",
+          "available": "Erreichbar",
+          "maintenance": "In Wartung",
+          "unavailable": "Nicht erreichbar"
+        }
+      },
+      "versionsProtocol": {
+        "": "Versionsprotokoll"
+      },
+      "userData": {
+        "": "Nutzerdaten"
+      },
+      "imprint": {
+        "": "Impressum"
+      }
+    },
+    "appInfo": {
+      "": "App Informationen"
+    }
+
+  },
+  "tour": {
+    "": "Tour",
+    "loadUp": "Beladen",
+    "unload": "Entladen",
+    "deliver": "Ausliefern",
+    "start": "Beginn",
+    "end": "Ende",
+    "reverseDeliver": "Lieferung rückrufen",
+    "deliveryDate": "Lieferdatum",
+    "selection": {
+      "header": "Wähle eine Tour aus"
+    },
+    "driverNote": {
+      "": "Fahrer Klemmbrett",
+      "content": "ACHTUNG: Diese Notiz ist nur für den Fahrer der aktuellen Tour und wird nicht ans Büro übermittelt"
+    },
+    "deliveryNote": "Lieferhinweis",
+    "mileage":"Kilometerstand",
+    "time": "Uhrzeit",
+    "notYetEntered": "Noch nicht eingetragen"
+
+  },
+  "station": {
+    "": "Station"
+  },
+  "auth": {
+    "login": {
+      "": "Einloggen",
+      "username": "Benutzername",
+      "password": "Passwort",
+      "proceedWithoutLogin": "Ohne Anmeldung fortfahren",
+      "passwordMissing": "Passwort fehlt",
+      "usernameMissing": "Benutzername fehlt"
+    },
+    "logout": {
+      "": "Ausloggen"
+    }
+  },
+  "navigation": {
+    "start": "Starte Navigation",
+    "nextDestination": "Nächster Halt"
+  },
+  "driver": {
+    "licensePlate": "Kennzeichen"
+  },
+  "button": {
+    "ok": "OK",
+    "cancel": "Abbrechen",
+    "back": "Zurück",
+    "yes": "Ja",
+    "no": "Nein",
+    "skip": "Überspringen",
+    "add": "Hinzufügen",
+    "downloadAgain": "Nein, erneut herunterladen",
+    "addNote": "Notiz hinzufügen",
+    "edit": "Bearbeiten",
+    "remove": "Entfernen",
+    "sort": "Umsortieren",
+    "listOfArticles": "Liste aller Artikel",
+    "addBox": "Kiste hinzufügen",
+    "images": "Bilder",
+    "deposit": "Pfand"
+  },
+  "popup": {
+    "title": {
+
+    },
+    "content": {
+
+    },
+    "warning": "Achtung!",
+    "save": "Änderungen speichern?",
+    "delivery": {
+      "": "Lieferung abgeschlossen?",
+      "content": "ACHTUNG: Bestätige dieses Fenster erst, wenn die Lieferung beim Kunden angekommen ist"
+    },
+    "notifications": {
+      "": "Nachrichten",
+      "driverNote": "Persönliche Nachrichten",
+      "tourNote": "Auf der Tour beachten",
+      "companyNote": "Betriebshinweis"
+    },
+    "logout":{
+      "content":  "Möchten Sie sich wirklich von der App abmelden?"
+    },
+    "tour": {
+      "content": "Möchten Sie diese Tour abbrechen?",
+      "alreadyAvailable": "Diese Tour ist bereits auf dem Gerät verfügbar! Erneutes herunterladen überspringen?",
+      "download": "Möchten Sie diese Tour herunterladen?"
+    },
+    "sort": {
+      "cancel": "Umsortieren ohne zu Speichern abbrechen?"
+    },
+    "allArticle": "Alle Artikel dieser Lieferung",
+    "addBox": "Neue Kiste hinzufügen",
+    "images": "Bilder"
+  },
+  "error": {
+    "usernameOrPasswordMissing": "Bitte Benutzername und Passwort eingeben",
+    "invalidPasswordOrUsername": "Benutzername oder Passwort falsch",
+    "http": {
+      "": "Unbekannter Netzwerkfehler",
+      "3xx": "Zum Bearbeiten der Anfrage sind weitere Schritte notwendig",
+      "4xx": "Die Anfrage ist ungültig oder nicht autorisiert",
+      "5xx": "Der Server konnte die Anfrage nicht korrekt bearbeiten oder ist nicht erreichbar",
+      "missingToken": "Der Token für die Sitzung wurde nicht mitgeschickt"
+    },
+    "emptyText": "Bitte füllen Sie das Textfeld aus!",
+    "invalidValue": "Bitte geben Sie einen gültigen Wert ein!",
+    "endMileageSmallerThanStart": "Der Kilometerstand kann am Ende nicht geringer sein als zu Beginn der Tour!",
+    "endLoadUpTimeBeforeStart": "Die Uhrzeit beim Beenden des Einladens kann nicht vor Beginn des Einladens sein!"
+  }
+}
