@@ -17,13 +17,23 @@ class Chat extends HiveObject with EquatableMixin {
 
   Chat({this.id, required this.title, this.imageUrl, this.members = const []});
 
-  Chat.fromMap(Map data) {
-    id = data['id'];
-    title = data['username'];
-    imageUrl = data['imageUrl'];
-    members = data['members'] ?? [];
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'imageUrl': imageUrl,
+      'members': members,
+    };
   }
 
+  factory Chat.fromMap(Map<String, dynamic> map) {
+    return Chat(
+      id: map['id'] as String,
+      title: map['title'] as String,
+      imageUrl: map['imageUrl'] as String,
+      members: map['members'] as List<User>,
+    );
+  }
   @override
   List<Object?> get props => [id, title];
 }

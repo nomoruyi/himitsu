@@ -75,7 +75,7 @@ class OekoSortIconButton extends StatelessWidget {
     return IconButton(
       padding: const EdgeInsets.only(right: 8.0),
       // color: oekoWhite,
-      onPressed: () => context.goNamed('sort', params: {'tour_id': tourId.toString()}),
+      onPressed: () => context.goNamed('sort', pathParameters: {'tour_id': tourId.toString()}),
       //  onPressed: null,
       iconSize: 32,
       icon: const Icon(Icons.format_line_spacing),

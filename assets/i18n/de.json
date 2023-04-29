@@ -5,10 +5,13 @@
     "next": "Weiter",
     "warning": "ACHTUNG",
     "menu": {
+      "loadUpAll": "Alle Lieferungen einladen",
       "logout": "Ausloggen",
       "settings": "Einstellungen",
-      "finishTour": "Tour beenden"
-    }
+      "finishTour": "Tour beenden?"
+    },
+    "camera": "Kamera",
+    "gallery": "Galerie"
   },
   "settings": {
     "": "Einstellungen",
@@ -32,9 +35,11 @@
         "useSystemTheme": "Systemmotiv\nübernehmen"
       }
     },
-
-    "info":{
+    "info": {
       "": "Info",
+      "appInfo": {
+        "": "App Info"
+      },
       "status": {
         "": "Status",
         "client": "Endnutzer",
@@ -51,7 +56,6 @@
         },
         "deviceID": "Geräte-ID",
         "deviceName": "Geräte Name",
-
         "server": "Server",
         "serverStatus": {
           "": "Serverstatus",
@@ -73,36 +77,44 @@
     "appInfo": {
       "": "App Informationen"
     }
-
   },
   "tour": {
     "": "Tour",
+    "deliveryDate": "Lieferdatum",
     "loadUp": "Beladen",
     "unload": "Entladen",
     "deliver": "Ausliefern",
     "start": "Beginn",
+    "startLoad": "Startzeitpunkt Beladen:",
+    "startDeliver": "Startzeitpunkt Ausliefern:",
     "end": "Ende",
-    "reverseDeliver": "Lieferung rückrufen",
-    "deliveryDate": "Lieferdatum",
+    "endLoad": "Endzeitpunkt Beladen:",
+    "endDeliver": "Endzeitpunkt Ausliefern:",
+    "callbackDelivery": "Lieferung rückrufen",
     "selection": {
-      "header": "Wähle eine Tour aus"
+      "header": "Tourauswahl"
     },
     "driverNote": {
       "": "Fahrer Klemmbrett",
       "content": "ACHTUNG: Diese Notiz ist nur für den Fahrer der aktuellen Tour und wird nicht ans Büro übermittelt"
     },
-    "deliveryNote": "Lieferhinweis",
-    "mileage":"Kilometerstand",
+    "toDoNote": "Lieferhinweis",
+    "deliveryNote": "Allgemeiner Hinweis",
+    "productNote": "Produkthinweis",
+    "mileage": "Kilometerstand",
+    "mileageAtStart": "Kilometerstand zu Beginn der Tour",
     "time": "Uhrzeit",
-    "notYetEntered": "Noch nicht eingetragen"
-
+    "timeAtStart": "Uhrzeit zu Beginn der Tour",
+    "notYetEntered": "Noch nicht eingetragen",
+    "tourFinished": "Tour wurde erfolgreich beendet",
+    "enterMileage": "Bitte trage den endgültigen Kilometerstand ein, sobald du deine Tour beendet hast und zur Basis zurückgekehrt bist."
   },
   "station": {
     "": "Station"
   },
   "auth": {
     "login": {
-      "": "Einloggen",
+      "": "Anmelden",
       "username": "Benutzername",
       "password": "Passwort",
       "proceedWithoutLogin": "Ohne Anmeldung fortfahren",
@@ -123,12 +135,14 @@
   "button": {
     "ok": "OK",
     "cancel": "Abbrechen",
+    "save": "Speichern",
     "back": "Zurück",
     "yes": "Ja",
     "no": "Nein",
     "skip": "Überspringen",
     "add": "Hinzufügen",
-    "downloadAgain": "Nein, erneut herunterladen",
+    "downloadAgain": "Erneut herunterladen",
+    "skipDownload": "Download überspringen",
     "addNote": "Notiz hinzufügen",
     "edit": "Bearbeiten",
     "remove": "Entfernen",
@@ -136,55 +150,78 @@
     "listOfArticles": "Liste aller Artikel",
     "addBox": "Kiste hinzufügen",
     "images": "Bilder",
-    "deposit": "Pfand"
+    "deposit": "Pfand",
+    "setAllToDelivered": "Markiere alle Stationen als 'ausgeliefert'"
+  },
+  "notification": {
+    "title": {
+      "tourFinished": "Tour erfolgreich beendet",
+      "success": "Super"
+    },
+    "message": {
+      "uploadSuccessful": "Die Datei wurde erfolgreich hochgeladen"
+    }
   },
   "popup": {
     "title": {
-
+      "finishLoadUp": "Beladen beenden und Ausliefern beginnen?",
+      "finishDelivery": "Zum Beladen zurückkehren?",
+      "differentLocation": "Neuer Standort?",
+      "finishTour": "Tour beenden",
+      "confirmDelivery": "Lieferung abgeschlossen?",
+      "navigateToBase": "Willst du dich zurück nach Hause navigieren lassen?",
+      "noVehicleSelected": "Fahrzeug fehlt",
+      "editNote": "Notiz bearbeiten",
+      "addBox": "Neue Kiste hinzufügen",
+      "allArticle": "Alle Artikel dieser Lieferung",
+      "images": "Bilder",
+      "warning": "Achtung!"
     },
     "content": {
-
+      "finishLoadUp": "Es wurden nicht alle Boxen eingeladen",
+      "differentLocation": "Der Standort, an dem du die Lieferung bestätigt hast, befindet sich mehr als 50 Meter von dem hinterlegten Standort. Soll der aktueller Standort hinterlegt werden?",
+      "finishTour": "Willst du die Tour wirklich beenden?",
+      "logout": "Willst du dich wirklich abmelden?",
+      "abortTour": "Willst du die Tour wirklich abbrechen?",
+      "cancelSort": "Sortieren abbrechen?",
+      "confirmDelivery": "ACHTUNG: Bestätige dieses Fenster erst, wenn die Lieferung beim Kunden angekommen ist",
+      "notAllStationsDelivered": "ACHTUNG: Es wurden noch nicht alle Stationen als 'ausgeliefert' markiert. Möchtest du die Tour dennoch beenden?",
+      "navigateToBase": "Willst du dich zurück nach Hause navigieren lassen?",
+      "noVehicleSelected": "Bitte wähle ein Fahrzeug aus, bevor du die Tour beendest",
+      "editNote": "ACHTUNG: Diese Notiz ist nur für den Fahrer der aktuellen Tour und wird nicht ans Büro übermittelt",
+      "alreadyAvailable": "Diese Tour ist bereits auf deinem Gerät verfügbar! Download überspringen?",
+      "downloadTour": "Willst du diese Tour herunterladen und starten?"
     },
-    "warning": "Achtung!",
-    "save": "Änderungen speichern?",
-    "delivery": {
-      "": "Lieferung abgeschlossen?",
-      "content": "ACHTUNG: Bestätige dieses Fenster erst, wenn die Lieferung beim Kunden angekommen ist"
-    },
-    "notifications": {
-      "": "Nachrichten",
-      "driverNote": "Persönliche Nachrichten",
-      "tourNote": "Auf der Tour beachten",
-      "companyNote": "Betriebshinweis"
-    },
-    "logout":{
-      "content":  "Möchten Sie sich wirklich von der App abmelden?"
-    },
-    "tour": {
-      "content": "Möchten Sie diese Tour abbrechen?",
-      "alreadyAvailable": "Diese Tour ist bereits auf dem Gerät verfügbar! Erneutes herunterladen überspringen?",
-      "download": "Möchten Sie diese Tour herunterladen?"
-    },
-    "sort": {
-      "cancel": "Umsortieren ohne zu Speichern abbrechen?"
-    },
-    "allArticle": "Alle Artikel dieser Lieferung",
-    "addBox": "Neue Kiste hinzufügen",
-    "images": "Bilder"
+    "save": "Änderungen speichern?"
   },
   "error": {
+    "": "Fehler",
+    "alreadyLoggedOnOtherDevice": "Dieser Nutzer ist bereits auf einem anderen Gerät angemeldet",
     "usernameOrPasswordMissing": "Bitte Benutzername und Passwort eingeben",
     "invalidPasswordOrUsername": "Benutzername oder Passwort falsch",
     "http": {
       "": "Unbekannter Netzwerkfehler",
       "3xx": "Zum Bearbeiten der Anfrage sind weitere Schritte notwendig",
-      "4xx": "Die Anfrage ist ungültig oder nicht autorisiert",
+      "4xx": "Anmeldung fehlgeschlagen! Überprüfe bitte deine Angaben und versuche es erneut.",
       "5xx": "Der Server konnte die Anfrage nicht korrekt bearbeiten oder ist nicht erreichbar",
-      "missingToken": "Der Token für die Sitzung wurde nicht mitgeschickt"
+      "missingToken": "Systemfehler. Versuche es erneut oder nimm Kontakt mit dem Support Team auf."
     },
-    "emptyText": "Bitte füllen Sie das Textfeld aus!",
-    "invalidValue": "Bitte geben Sie einen gültigen Wert ein!",
+    "emptyText": "Bitte fülle das Textfeld aus!",
+    "invalidValue": "Bitte geb einen gültigen Wert ein!",
     "endMileageSmallerThanStart": "Der Kilometerstand kann am Ende nicht geringer sein als zu Beginn der Tour!",
-    "endLoadUpTimeBeforeStart": "Die Uhrzeit beim Beenden des Einladens kann nicht vor Beginn des Einladens sein!"
+    "endLoadUpTimeBeforeStart": "Die Uhrzeit beim Beenden des Beladens kann nicht vor Beginn des Beladens sein!",
+    "chooseOption": "Wähle eine gültige Option aus!",
+    "uploadFile": "Die Datei konnte nicht hochgeladen werden"
+  },
+  "enums": {
+    "tourStatus": {
+      "OPEN": "Offen",
+      "LOADING": "Einladen",
+      "LOADED": "Eingeladen",
+      "DELIVERING": "Ausliefern",
+      "DELIVERED": "Ausgeliefert",
+      "UNLOADING": "Entladen",
+      "COMPLETE": "Ausgeliefert"
+    }
   }
 }

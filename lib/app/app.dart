@@ -35,11 +35,10 @@ class Himitsu extends StatelessWidget {
           child: MultiBlocProvider(
             providers: [
               // BlocProvider(create: (context) => NetworkBloc()..add(NetworkObserve())),
-              // BlocProvider(create: (context) => AuthBloc()),
-              // BlocProvider(create: (context) => TourBloc()),
+              BlocProvider(create: (context) => AuthBloc()),
             ],
             child: MaterialApp.router(
-              title: 'Driver App',
+              title: 'Himitsu',
               routerConfig: router,
               localizationsDelegates: [
                 FlutterI18nDelegate(
@@ -72,6 +71,7 @@ class MainView extends StatefulWidget {
 
 class _MainViewState extends State<MainView> {
   late final AuthBloc _initializationBloc = BlocProvider.of<AuthBloc>(context);
+  late final settingsProvider = Provider.of<SettingsProvider>(context, listen: true);
 
   @override
   void initState() {
@@ -90,9 +90,9 @@ class _MainViewState extends State<MainView> {
           listenWhen: (prev, current) => current is InitializationState,
           listener: (_, state) {
             if (state is ShowIntroductionSlides) {
-              context.pushNamed('introduction');
+              context.pushNamed(Routes.introduction.name);
             } else if (state is ShowLicenseView) {
-              context.pushNamed('license');
+              context.pushNamed(Routes.license.name);
 /*
             } else if (state is LogoutSuccessful) {
               while(context.canPop()) {
@@ -101,16 +101,18 @@ class _MainViewState extends State<MainView> {
               context.pushNamed('login');
 */
             } else if (state is ShowLoginView) {
-              context.pushNamed('login');
+              context.pushNamed(Routes.login.name);
             } else if (state is StartMainApp) {
-              context.pushNamed('tours');
+              context.pushNamed(Routes.chats.name);
             }
           },
-          child: const DriverLoadingWidget(
+          child: LoadingWidget(
             child: Scaffold(
               resizeToAvoidBottomInset: false,
               body: Center(
-                child: Image(image: AssetImage('assets/logos/oekobox-driver_logo.png')),
+                child: Image(
+                    image: AssetImage(
+                        settingsProvider.theme == ThemeMode.light ? 'assets/logos/bio_courier_logo.png' : 'assets/logos/bio_courier_logo_dark.png')),
               ),
             ),
           ),

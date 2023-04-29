@@ -3,7 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 part 'user_model.g.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: 3)
 class User extends HiveObject with EquatableMixin {
   @HiveField(0)
   int? id;

@@ -3,10 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class DriverLoadingWidget extends StatelessWidget {
+class LoadingWidget extends StatelessWidget {
   final Widget? child;
 
-  const DriverLoadingWidget({Key? key, this.child}) : super(key: key);
+  const LoadingWidget({Key? key, this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

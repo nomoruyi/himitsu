@@ -7,7 +7,9 @@ class HimitsuAuthService implements AuthService {
   static final HimitsuAuthService instance = HimitsuAuthService._internal(CacheAuthService.instance);
 
   @override
-  Future<void> login({required String? username, required String? password}) async {}
+  Future<void> login({required String? username, required String? password}) async {
+    throw 'Go to Login page';
+  }
 
   @override
   Future<void> logout() async {}
