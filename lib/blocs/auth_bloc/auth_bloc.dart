@@ -39,7 +39,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           .then((successful) => emit(StartMainApp()))
           .catchError((error) => emit(ShowLoginView()));
     } else {
-      await authService.cacheTourService
+      await authService.cacheAuthService
           .login(username: authData.username, password: authData.password)
           .then((successful) => emit(StartMainApp()))
           .catchError((error) => emit(ShowLoginView()));
@@ -55,7 +55,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           .then((successful) => emit(LoginSuccessful()))
           .onError((error, stackTrace) => emit(LoginFailed(errorKey: error.toString())));
     } else {
-      await authService.cacheTourService
+      await authService.cacheAuthService
           .login(username: event.username, password: event.password)
           .then((successful) => emit(LoginSuccessful()))
           .onError((error, stackTrace) => emit(LoginFailed(errorKey: error.toString())));
@@ -69,7 +69,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           .then((value) => emit(LogoutSuccessful()))
           .onError((error, stackTrace) => emit(LogoutFailed(errorKey: error.toString())));
     } else {
-      await authService.cacheTourService
+      await authService.cacheAuthService
           .logout()
           .then((value) => emit(LogoutSuccessful()))
           .onError((error, stackTrace) => emit(LogoutFailed(errorKey: error.toString())));

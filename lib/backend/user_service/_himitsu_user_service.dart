@@ -6,7 +6,13 @@ import 'package:himitsu_app/backend/user_service/user_service.dart';
 class HimitsuUserService implements UserService {
   @override
   Future<List<User>> getUsers() async {
-    QueryResult result = await GraphQLConfig.instance.client.value.query(QueryOptions(document: gql("document")));
+    QueryResult result = await GraphQLConfig.instance.client.value.query(QueryOptions(
+      fetchPolicy: FetchPolicy.noCache,
+      document: gql("""
+      
+      """),
+    ));
+
     return <User>[];
   }
 

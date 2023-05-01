@@ -3,7 +3,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:go_router/go_router.dart';
 import 'package:himitsu_app/utils/settings_util.dart';
 
-class DriverAppBar extends StatelessWidget implements PreferredSizeWidget {
+class HimitsuAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;
   final double height;
   final Widget? leading;
@@ -13,7 +13,7 @@ class DriverAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool centerTitle;
   final bool implyLeadingWidget;
 
-  const DriverAppBar(
+  const HimitsuAppBar(
       {Key? key,
       this.title,
       this.height = 56,

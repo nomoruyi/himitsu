@@ -10,7 +10,7 @@ class GraphQLConfig {
 
   final AuthLink authLink = AuthLink(getToken: () => 'x-hasura-admin-secret ${dotenv.env['HASURA_TOKEN']}');
 
-  // GraphQLClient createClient() => GraphQLClient(link: endpoint, cache: GraphQLCache());
+  GraphQLClient createClient() => GraphQLClient(link: endpoint, cache: GraphQLCache());
 
   final ValueNotifier<GraphQLClient> client = ValueNotifier(
     GraphQLClient(
