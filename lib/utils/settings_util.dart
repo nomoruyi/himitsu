@@ -172,7 +172,7 @@ class TextSize {
 // you use a lower version, some properties may not be supported. In
 // that case you can also remove them after copying the theme to your app.
 final ThemeData oekoLightTheme = FlexThemeData.light(
-  scheme: FlexScheme.blumineBlue,
+  scheme: FlexScheme.indigo,
   surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
   blendLevel: 9,
   appBarElevation: 4.0,
@@ -198,7 +198,7 @@ final ThemeData oekoLightTheme = FlexThemeData.light(
   fontFamily: GoogleFonts.poppins().fontFamily,
 );
 final ThemeData oekoDarkTheme = FlexThemeData.dark(
-  scheme: FlexScheme.blumineBlue,
+  scheme: FlexScheme.indigo,
   surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
   blendLevel: 15,
   appBarElevation: 4.0,
