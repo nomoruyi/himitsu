@@ -19,10 +19,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:go_router/go_router.dart';
 import 'package:himitsu_app/app/app.dart';
-import 'package:himitsu_app/app/views/auth/license_view.dart';
-import 'package:himitsu_app/app/views/auth/login_view.dart';
-import 'package:himitsu_app/app/views/base/chats/chats_view.dart';
-import 'package:himitsu_app/app/views/introduction/introduction_view.dart';
+import 'package:himitsu_app/app/pages/auth/license_view.dart';
+import 'package:himitsu_app/app/pages/auth/login_view.dart';
+import 'package:himitsu_app/app/pages/base/chats_view.dart';
+import 'package:himitsu_app/app/pages/introduction/introduction_view.dart';
 import 'package:himitsu_app/utils/settings_util.dart';
 
 enum Routes {
@@ -90,8 +90,7 @@ Widget _buildSlideTransition2(context, animation, secondaryAnimation, child) {
   );
 }
 
-Widget _buildSlideTransition(BuildContext context, Animation<double> animation,
-    Animation<double> secondaryAnimation, Widget child) {
+Widget _buildSlideTransition(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
   return SlideTransition(
     position: Tween<Offset>(
       begin: const Offset(1.0, 0.0),
@@ -120,10 +119,7 @@ class ErrorScreen extends StatelessWidget {
         child: Center(
           child: Text(
             FlutterI18n.translate(context, 'error.http.4xx'),
-            style: TextStyle(
-                fontSize: TextSize.extraLarge,
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.background),
+            style: TextStyle(fontSize: TextSize.extraLarge, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.background),
           ),
         ),
       ),

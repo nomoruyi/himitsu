@@ -103,6 +103,27 @@ class SettingsProvider extends ChangeNotifier {
     }
   }
 
+/*
+  String getAppIconPath() {
+    if (useSystemTheme) {
+      return SchedulerBinding.instance.platformDispatcher.platformBrightness == Brightness.light
+          ? 'assets/icons/himitsu_app_icon.png'
+          : 'assets/icons/himitsu_app_icon_dark.png';
+    }
+
+    switch (theme) {
+      case ThemeMode.system:
+        return SchedulerBinding.instance.platformDispatcher.platformBrightness == Brightness.light
+            ? 'assets/icons/himitsu_app_icon.png'
+            : 'assets/icons/himitsu_app_icon_dark.png';
+      case ThemeMode.light:
+        return 'assets/icons/himitsu_app_icon.png';
+      case ThemeMode.dark:
+        return 'assets/icons/himitsu_app_icon_dark.png';
+    }
+  }
+*/
+
   //endregion
 
   void resetSettings() {

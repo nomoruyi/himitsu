@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 0.2.1+2
+version: 0.2.2+2
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -69,6 +69,7 @@ dependencies:
   flutter_spinkit: ^5.1.0
   device_info_plus: ^9.0.2
   stream_chat_flutter: ^6.10.0
+  logger: ^2.0.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -112,8 +113,10 @@ flutter:
     - assets/i18n/en.json
 
     # icons
-    - assets/icons/app_icon.png
-    - assets/icons/bio_courier_app_icon.png
+    - assets/icons/himitsu_app_icon.png
+
+    # logos
+    - assets/logos/himitsu_logo.png
 
     - assets/icons/nav_bar/cart_active.svg
     - assets/icons/nav_bar/cart.svg
@@ -123,13 +126,7 @@ flutter:
     - assets/icons/nav_bar/start.svg
 
     # images
-    - assets/icons/bio_courier_app_icon.png
-    - assets/images/bio_courier_splash_screen.png
-    - assets/logos/bio_courier_logo.png
-
-    - assets/icons/bio_courier_app_icon_dark.png
-    - assets/images/bio_courier_splash_screen_dark.png
-    - assets/logos/bio_courier_logo_dark.png
+    - assets/icons/himitsu_app_icon.png
 
     # files
     - .env

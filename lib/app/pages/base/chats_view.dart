@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as fct;
 import 'package:go_router/go_router.dart';
 import 'package:himitsu_app/app/widgets/app_bar_widget.dart';
+import 'package:himitsu_app/utils/env_util.dart';
+import 'package:himitsu_app/utils/stream_client_util.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class ChannelListPage extends StatefulWidget {
@@ -35,8 +37,36 @@ class _ChannelListPageState extends State<ChannelListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: StreamChannelListHeader(
+        client: ChatClientUtil.client,
+        titleBuilder: (ctx, status, client) {
+          return Text("Hello ${ChatClientUtil.currentUser.user.name}");
+        },
+        showConnectionStateTile: true,
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            width: 150,
+            height: 150,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.transparent,
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage('assets/logos/himitsu_logo.png'),
+              ),
+            ),
+            child: InkWell(
+              onLongPress: () => log.i('open menu'),
+              onDoubleTap: () => log.i('delete all data?'),
+              borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+            ),
+          ),
+        ),
+      ),
       body: StreamChannelListView(
         controller: _listController,
+        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
         onChannelTap: (channel) {
           Navigator.of(context).push(
             MaterialPageRoute(
@@ -68,7 +98,7 @@ class ChannelPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: StreamChannelHeader(),
+      appBar: StreamChannelHeader(showTypingIndicator: true),
       body: Column(
         children: <Widget>[
           Expanded(

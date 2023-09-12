@@ -56,7 +56,7 @@ class Himitsu extends StatelessWidget {
               theme: oekoLightTheme,
               darkTheme: oekoDarkTheme,
               themeMode: settingsProvider.theme,
-              builder: (ctx, child) => StreamChat(client: StreamClientUtil.client, child: child),
+              builder: (ctx, child) => StreamChat(client: ChatClientUtil.client, child: child),
             ),
           ),
         );
@@ -115,7 +115,7 @@ class _MainViewState extends State<MainView> {
               body: Center(
                 child: Image(
                     image: AssetImage(
-                        settingsProvider.theme == ThemeMode.light ? 'assets/logos/bio_courier_logo.png' : 'assets/logos/bio_courier_logo_dark.png')),
+                        settingsProvider.theme == ThemeMode.light ? 'assets/icons/himitsu_app_icon.png' : 'assets/icons/himitsu_app_icon.png')),
               ),
             ),
           ),

@@ -86,9 +86,8 @@ class _LoginViewState extends State<LoginView> {
                 Expanded(
                   flex: 2,
                   child: Image(
-                      image: AssetImage(settingsProvider.theme == ThemeMode.light
-                          ? 'assets/logos/bio_courier_logo.png'
-                          : 'assets/logos/bio_courier_logo_dark.png')),
+                      image: AssetImage(
+                          settingsProvider.theme == ThemeMode.light ? 'assets/icons/himitsu_app_icon.png' : 'assets/icons/himitsu_app_icon.png')),
                 ),
                 Flexible(
                   flex: 3,
