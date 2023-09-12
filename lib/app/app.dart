@@ -9,7 +9,9 @@ import 'package:himitsu_app/app/widgets/loading_widget.dart';
 import 'package:himitsu_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:himitsu_app/utils/router_util.dart';
 import 'package:himitsu_app/utils/settings_util.dart';
+import 'package:himitsu_app/utils/stream_client_util.dart';
 import 'package:provider/provider.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class Himitsu extends StatelessWidget {
   const Himitsu({super.key});
@@ -21,7 +23,7 @@ class Himitsu extends StatelessWidget {
       builder: (context, child) {
         final settingsProvider = Provider.of<SettingsProvider>(context, listen: true);
 
-        WidgetsBinding.instance.window.platformDispatcher.onPlatformBrightnessChanged = () {
+        WidgetsBinding.instance.platformDispatcher.onPlatformBrightnessChanged = () {
           if (settingsProvider.useSystemTheme) {
             settingsProvider.theme =
                 ThemeMode.values.firstWhere((element) => element.name == SchedulerBinding.instance.platformDispatcher.platformBrightness.name);
@@ -54,6 +56,7 @@ class Himitsu extends StatelessWidget {
               theme: oekoLightTheme,
               darkTheme: oekoDarkTheme,
               themeMode: settingsProvider.theme,
+              builder: (ctx, child) => StreamChat(client: StreamClientUtil.client, child: child),
             ),
           ),
         );

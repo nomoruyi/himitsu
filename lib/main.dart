@@ -9,6 +9,7 @@ import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:himitsu_app/app/app.dart';
 import 'package:himitsu_app/utils/env_util.dart';
 import 'package:himitsu_app/utils/hive_util.dart';
+import 'package:himitsu_app/utils/stream_client_util.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
@@ -20,9 +21,12 @@ Future<void> main() async {
   await BuildEnvironment.init(flavor: BuildFlavor.production);
 
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+      overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
 
-  await initHive();
+  await StreamClientUtil.init();
+
+  await HiveUtil.init();
 
   // runApp(const MyApp());
   runApp(const Himitsu());
@@ -52,7 +56,7 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     super.initState();
-    _loadMessages();
+    // _loadMessages();
   }
 
   @override
@@ -170,8 +174,10 @@ class _ChatPageState extends State<ChatPage> {
 
       if (message.uri.startsWith('http')) {
         try {
-          final index = _messages.indexWhere((element) => element.id == message.id);
-          final updatedMessage = (_messages[index] as types.FileMessage).copyWith(
+          final index =
+              _messages.indexWhere((element) => element.id == message.id);
+          final updatedMessage =
+              (_messages[index] as types.FileMessage).copyWith(
             isLoading: true,
           );
 
@@ -190,8 +196,10 @@ class _ChatPageState extends State<ChatPage> {
             await file.writeAsBytes(bytes);
           }
         } finally {
-          final index = _messages.indexWhere((element) => element.id == message.id);
-          final updatedMessage = (_messages[index] as types.FileMessage).copyWith(
+          final index =
+              _messages.indexWhere((element) => element.id == message.id);
+          final updatedMessage =
+              (_messages[index] as types.FileMessage).copyWith(
             isLoading: null,
           );
 
@@ -232,7 +240,9 @@ class _ChatPageState extends State<ChatPage> {
 
   void _loadMessages() async {
     final response = await rootBundle.loadString('assets/messages.json');
-    final messages = (jsonDecode(response) as List).map((e) => types.Message.fromJson(e as Map<String, dynamic>)).toList();
+    final messages = (jsonDecode(response) as List)
+        .map((e) => types.Message.fromJson(e as Map<String, dynamic>))
+        .toList();
 
     setState(() {
       _messages = messages;

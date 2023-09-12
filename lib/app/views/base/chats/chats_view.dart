@@ -1,34 +1,115 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_types/flutter_chat_types.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart' as fct;
+import 'package:go_router/go_router.dart';
 import 'package:himitsu_app/app/widgets/app_bar_widget.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
-class ChatsView extends StatefulWidget {
-  const ChatsView({Key? key}) : super(key: key);
+class ChannelListPage extends StatefulWidget {
+  const ChannelListPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<ChatsView> createState() => _ChatsViewState();
+  State<ChannelListPage> createState() => _ChannelListPageState();
 }
 
-class _ChatsViewState extends State<ChatsView> {
+class _ChannelListPageState extends State<ChannelListPage> {
+  late final StreamChannelListController _listController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _listController = StreamChannelListController(
+      client: StreamChat.of(context).client,
+      filter: Filter.in_(
+        'members',
+        [StreamChat.of(context).currentUser!.id],
+      ),
+      channelStateSort: const [SortOption('last_message_at')],
+      limit: 20,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: StreamChannelListView(
+        controller: _listController,
+        onChannelTap: (channel) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                return StreamChannel(
+                  channel: channel,
+                  child: const ChannelPage(),
+                );
+              },
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _listController.dispose();
+    super.dispose();
+  }
+}
+
+class ChannelPage extends StatelessWidget {
+  const ChannelPage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      appBar: StreamChannelHeader(),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: StreamMessageListView(),
+          ),
+          StreamMessageInput(),
+        ],
+      ),
+    );
+  }
+}
+
+//--------------------------------------------------------------------------------------
+
+class ChatsListPage extends StatefulWidget {
+  const ChatsListPage({Key? key}) : super(key: key);
+
+  @override
+  State<ChatsListPage> createState() => _ChatsListPageState();
+}
+
+class _ChatsListPageState extends State<ChatsListPage> {
   String profilePicture =
       "https://unicheck.unicum.de/sites/default/files/artikel/image/informatik-kannst-du-auch-auf-englisch-studieren-gettyimages-rosshelen-uebersichtsbild.jpg";
 
   // Todo: Include backend
-  final List<User> _allUserList = [
-    const User(id: "Hendrik"),
-    const User(id: "Daniel"),
-    const User(id: "Nosa"),
-    const User(id: "Eric"),
-    const User(id: "Sven"),
-    const User(id: "David"),
-    const User(id: "Martin"),
-    const User(id: "Karl"),
-    const User(id: "Hans"),
-    const User(id: "Petra"),
-    const User(id: "Steffi"),
-    const User(id: "Jürgen"),
+  final List<fct.User> _allUserList = [
+    const fct.User(id: "Hendrik"),
+    const fct.User(id: "Daniel"),
+    const fct.User(id: "Nosa"),
+    const fct.User(id: "Eric"),
+    const fct.User(id: "Sven"),
+    const fct.User(id: "David"),
+    const fct.User(id: "Martin"),
+    const fct.User(id: "Karl"),
+    const fct.User(id: "Hans"),
+    const fct.User(id: "Petra"),
+    const fct.User(id: "Steffi"),
+    const fct.User(id: "Jürgen"),
   ];
-  List<User> _foundUsersList = [];
+  List<fct.User> _foundUsersList = [];
 
   @override
   void initState() {
@@ -74,7 +155,7 @@ class _ChatsViewState extends State<ChatsView> {
                       overflow: TextOverflow.ellipsis,
                     ),
                     trailing: const Text("12:34 Uhr"),
-                    onTap: () => Navigator.of(context).pushNamed("chat_messages"),
+                    onTap: () => context.pushNamed("chat_messages"),
                   );
                 },
               ),
@@ -111,7 +192,7 @@ class _ChatsViewState extends State<ChatsView> {
 
   /// Checks if user input [text] is equal to the [name] of all users and overwrites [_foundUsersList].
   filterSearchResults(String? text) {
-    List<User> filterList = <User>[];
+    List<fct.User> filterList = <fct.User>[];
     if (text != null && text.isNotEmpty) {
       setState(() {
         filterList.addAll(_allUserList.where((user) => user.id.toString().toLowerCase().contains(text.toLowerCase())).toList());

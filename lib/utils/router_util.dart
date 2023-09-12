@@ -69,7 +69,7 @@ final GoRouter router = GoRouter(
         GoRoute(
           name: Routes.chats.name,
           path: Routes.chats.name,
-          builder: (context, state) => const ChatsView(),
+          builder: (context, state) => const ChannelListPage(),
         ),
       ],
     ),
@@ -90,7 +90,8 @@ Widget _buildSlideTransition2(context, animation, secondaryAnimation, child) {
   );
 }
 
-Widget _buildSlideTransition(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+Widget _buildSlideTransition(BuildContext context, Animation<double> animation,
+    Animation<double> secondaryAnimation, Widget child) {
   return SlideTransition(
     position: Tween<Offset>(
       begin: const Offset(1.0, 0.0),
@@ -119,7 +120,10 @@ class ErrorScreen extends StatelessWidget {
         child: Center(
           child: Text(
             FlutterI18n.translate(context, 'error.http.4xx'),
-            style: TextStyle(fontSize: TextSize.extraLarge, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.background),
+            style: TextStyle(
+                fontSize: TextSize.extraLarge,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.background),
           ),
         ),
       ),
