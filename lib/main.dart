@@ -8,7 +8,9 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:himitsu_app/app/app.dart';
 import 'package:himitsu_app/utils/env_util.dart';
+import 'package:himitsu_app/utils/firebase_util.dart';
 import 'package:himitsu_app/utils/hive_util.dart';
+import 'package:himitsu_app/utils/notification_util.dart';
 import 'package:himitsu_app/utils/stream_client_util.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
@@ -26,6 +28,8 @@ Future<void> main() async {
   await ChatClientUtil.init();
 
   await HiveUtil.init();
+  await FirebaseUtil.init();
+  await NotificationUtil.init();
 
   // runApp(const MyApp());
   runApp(const Himitsu());

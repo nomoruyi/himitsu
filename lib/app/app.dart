@@ -7,6 +7,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:himitsu_app/app/widgets/loading_widget.dart';
 import 'package:himitsu_app/blocs/auth_bloc/auth_bloc.dart';
+import 'package:himitsu_app/utils/env_util.dart';
+import 'package:himitsu_app/utils/notification_util.dart';
 import 'package:himitsu_app/utils/router_util.dart';
 import 'package:himitsu_app/utils/settings_util.dart';
 import 'package:himitsu_app/utils/stream_client_util.dart';
@@ -76,9 +78,18 @@ class _MainViewState extends State<MainView> {
   late final AuthBloc _initializationBloc = BlocProvider.of<AuthBloc>(context);
   late final settingsProvider = Provider.of<SettingsProvider>(context, listen: true);
 
+  Future<void> _setupNotificationHandling() async {
+    log.i('Setup Notification!');
+    NotificationUtil.setForegroundNotificationListener();
+    NotificationUtil.setBackgroundNotificationListener();
+    NotificationUtil.setTerminatedNotificationListener();
+  }
+
   @override
   void initState() {
     super.initState();
+
+    _setupNotificationHandling();
 
     _initializationBloc.add(InitializeApp());
   }

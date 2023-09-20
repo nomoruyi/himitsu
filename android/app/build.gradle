@@ -25,6 +25,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+// START: FlutterFire Configuration
+apply plugin: 'com.google.gms.google-services'
+// END: FlutterFire Configuration
+
 android {
     compileSdkVersion localProperties.getProperty("flutter.compileSdkVersion").toInteger()
     ndkVersion flutter.ndkVersion
@@ -46,7 +50,7 @@ android {
         multiDexEnabled true
 
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "de.nomoruyi.himitsu_app"
+        applicationId "xyz.jack_3n1gm4.himitsu_app"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion localProperties.getProperty("flutter.minSdkVersion").toInteger()
@@ -73,4 +77,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-bom:1.8.0"
     implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.google.firebase:firebase-bom:32.3.1'
 }
