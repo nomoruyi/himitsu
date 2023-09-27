@@ -31,7 +31,6 @@ Future<void> main() async {
   await FirebaseUtil.init();
   await NotificationUtil.init();
 
-  // runApp(const MyApp());
   runApp(const Himitsu());
   // initializeDateFormatting().then((_) => runApp(const Himitsu()));
 }

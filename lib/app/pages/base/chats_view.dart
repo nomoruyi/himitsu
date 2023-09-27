@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as fct;
 import 'package:go_router/go_router.dart';
@@ -97,17 +98,27 @@ class ChannelPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: StreamChannelHeader(showTypingIndicator: true),
+    return Scaffold(
+      appBar: const StreamChannelHeader(showTypingIndicator: true),
       body: Column(
         children: <Widget>[
-          Expanded(
+          const Expanded(
             child: StreamMessageListView(),
           ),
-          StreamMessageInput(),
+          StreamMessageInput(
+            onMessageSent: _sendFirebaseMessage,
+          ),
         ],
       ),
     );
+  }
+
+  Future<void> _sendFirebaseMessage(Message message) async {
+    await FirebaseMessaging.instance.sendMessage(messageId: message.id, messageType: message.type, data: {
+      'senderId': message.user?.id ?? 'UNKNOWN USER',
+      'message': message.text ?? 'NO TEXT',
+    });
+    log.i(message);
   }
 }
 
@@ -162,7 +173,7 @@ class _ChatsListPageState extends State<ChatsListPage> {
           centerTitle: true,
           leading: null,
           // automaticallyImplyLeading: false,
-          actions: [OekoSettingsIconButton()],
+          actions: [HimitsuSettingsIconButton()],
         ),
         body: Column(
           children: <Widget>[

@@ -45,8 +45,8 @@ class HimitsuAppBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 //region Icon-Buttons
-class OekoSettingsIconButton extends StatelessWidget {
-  const OekoSettingsIconButton({Key? key}) : super(key: key);
+class HimitsuSettingsIconButton extends StatelessWidget {
+  const HimitsuSettingsIconButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,11 +60,11 @@ class OekoSettingsIconButton extends StatelessWidget {
   }
 }
 
-class OekoSortIconButton extends StatelessWidget {
+class HimitsuSortIconButton extends StatelessWidget {
   // final TourBloc tourBloc;
   final int tourId;
 // final void Function() refresh;
-  const OekoSortIconButton({
+  const HimitsuSortIconButton({
     Key? key,
     required this.tourId,
     /*required this.refresh*/
@@ -83,10 +83,10 @@ class OekoSortIconButton extends StatelessWidget {
   }
 }
 
-class OekoSearchIconButton extends StatelessWidget {
+class HimitsuSearchIconButton extends StatelessWidget {
   final SearchDelegate delegate;
 
-  const OekoSearchIconButton({Key? key, required this.delegate}) : super(key: key);
+  const HimitsuSearchIconButton({Key? key, required this.delegate}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -99,8 +99,8 @@ class OekoSearchIconButton extends StatelessWidget {
   }
 }
 
-class OekoMenuButton extends StatelessWidget {
-  const OekoMenuButton(
+class HimitsuMenuButton extends StatelessWidget {
+  const HimitsuMenuButton(
     this.handleClick, {
     Key? key,
   }) : super(key: key);

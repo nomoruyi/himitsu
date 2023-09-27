@@ -6,11 +6,13 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:himitsu_app/backend/auth_service/auth_service.dart';
 import 'package:himitsu_app/models/auth_data_model.dart';
 import 'package:himitsu_app/utils/env_util.dart';
+import 'package:himitsu_app/utils/stream_client_util.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 abstract class NotificationUtil {
-  static late final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
-  static late final AndroidNotificationChannel androidChannel;
-  static late final NotificationDetails generalNotificationDetails;
+  static FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
+  static AndroidNotificationChannel? androidChannel;
+  static NotificationDetails? generalNotificationDetails;
 
   static Future<void> init() async {
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
@@ -38,11 +40,12 @@ abstract class NotificationUtil {
     const InitializationSettings initializationSettings =
         InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
 
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings, onDidReceiveNotificationResponse: onNotificationSelected);
-    AndroidNotificationDetails androidDetails = AndroidNotificationDetails(androidChannel.id, androidChannel.name,
-        channelDescription: androidChannel.description,
+    await flutterLocalNotificationsPlugin?.initialize(initializationSettings,
+        onDidReceiveNotificationResponse: onNotificationSelected, onDidReceiveBackgroundNotificationResponse: onNotificationSelected);
+    AndroidNotificationDetails androidDetails = AndroidNotificationDetails(androidChannel!.id, androidChannel!.name,
+        channelDescription: androidChannel?.description,
         // icon: android.smallIcon,
-        importance: androidChannel.importance,
+        importance: androidChannel!.importance,
         priority: Priority.high
         // other properties...
         );
@@ -50,11 +53,11 @@ abstract class NotificationUtil {
     generalNotificationDetails = NotificationDetails(android: androidDetails, iOS: iosDetails);
 
     await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(androidChannel);
+        ?.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(androidChannel!);
   }
 
-  static onNotificationSelected(NotificationResponse response) {
+  static void onNotificationSelected(NotificationResponse response) {
     log.d('PayLoad: ${response.payload}');
 
     if (response.payload == null) return;
@@ -75,27 +78,23 @@ abstract class NotificationUtil {
     handleMessage(RemoteMessage(data: data));
   }
 
-  static setForegroundNotificationListener() {
+  static void setForegroundNotificationListener() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       log.i('FOREGROUND NOTIFICATION RECEIVED');
       log.i('Message data: ${message.data}');
 
-      RemoteNotification? notification = message.notification;
-      AndroidNotification? android = message.notification?.android;
-
       // If `onMessage` is triggered with a notification, construct our own
       // local notification to show to users using the created channel.
-      if (notification != null && android != null) {
-        if (!isForCurrentDevice(message)) return;
 
-        flutterLocalNotificationsPlugin.show(notification.hashCode, notification.title, notification.body, generalNotificationDetails,
-            payload: message.data.toString());
-      }
+      if (!isForCurrentDevice(message)) return;
+
+      handleMessage(message);
     });
   }
 
-  static setBackgroundNotificationListener() {
+  static void setBackgroundNotificationListener() async {
     // FirebaseMessaging.onBackgroundMessage((message) {});
+
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       log.i('BACKGROUND NOTIFICATION RECEIVED');
       log.i('Message data: ${message.data}');
@@ -104,7 +103,7 @@ abstract class NotificationUtil {
     });
   }
 
-  static setTerminatedNotificationListener() async {
+  static void setTerminatedNotificationListener() async {
     FirebaseMessaging.instance.getInitialMessage().then((initialMessage) {
       if (initialMessage != null) {
         log.i('TERMINATED NOTIFICATION RECEIVED');
@@ -117,23 +116,29 @@ abstract class NotificationUtil {
     });
   }
 
-  static void handleMessage(RemoteMessage message) {
+  @pragma('vm:entry-point')
+  static Future<void> handleMessage(RemoteMessage message) async {
     // String userId = message.data['id'];
-    String? messageType = message.data['type'];
-    String? route;
+    ChatClientUtil.client.connectUser(
+      ChatClientUtil.currentUser.user,
+      ChatClientUtil.currentUser.token,
+      connectWebSocket: false,
+    );
 
-    if (messageType == DataType.incident.name) {
-      route = 'incident_details';
-    } else if (messageType == DataType.building.name) {
-      route = 'building_details';
-    } else if (messageType == DataType.department.name) {
-      route = 'department_details';
-    } else if (messageType == DataType.room.name) {
-      route = 'room_details';
-    } else if (messageType == DataType.device.name) {
-      route = 'device_details';
+    log.w('MESSAGE RECEIVED');
+
+    final Map<String, dynamic> data = message.data;
+
+    final String messageId = data['id'];
+    final GetMessageResponse response = await ChatClientUtil.client.getMessage(messageId);
+
+    if (flutterLocalNotificationsPlugin == null) {
+      await init();
     }
-    if (route == null) return;
+
+    flutterLocalNotificationsPlugin!.show(
+        1, 'Nachricht von ${response.message.user?.name} in ${response.channel?.name}', response.message.text, generalNotificationDetails,
+        payload: message.data.toString());
 
     // navigatorKey.currentState?.pushNamed(route, arguments: {'id': int.parse(message.data['id'])});
 
@@ -142,13 +147,13 @@ abstract class NotificationUtil {
 
   static bool isForCurrentDevice(RemoteMessage message) {
     AuthData? authData = AuthService.authBox.get('authData');
-    String? userId = message.data['user_id'];
+    String? receiverId = message.data['receiver_id'];
 
     if (authData == null) return false;
 
-    if (userId == null) return true;
+    if (receiverId == null || receiverId == ChatClientUtil.currentUser.user.id) return true;
 
-    return true;
+    return false;
   }
 }
 
