@@ -1,8 +1,4 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_types/flutter_chat_types.dart' as fct;
-import 'package:go_router/go_router.dart';
-import 'package:himitsu_app/app/widgets/app_bar_widget.dart';
 import 'package:himitsu_app/utils/env_util.dart';
 import 'package:himitsu_app/utils/stream_client_util.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
@@ -21,7 +17,6 @@ class _ChannelListPageState extends State<ChannelListPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _listController = StreamChannelListController(
@@ -49,12 +44,13 @@ class _ChannelListPageState extends State<ChannelListPage> {
           child: Container(
             width: 150,
             height: 150,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.transparent,
               image: DecorationImage(
                 fit: BoxFit.fill,
-                image: AssetImage('assets/logos/himitsu_logo.png'),
+                image: NetworkImage(ChatClientUtil.currentUser.user.image ?? 'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png',
+                    scale: 1.0),
               ),
             ),
             child: InkWell(
@@ -98,32 +94,31 @@ class ChannelPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const StreamChannelHeader(showTypingIndicator: true),
+    return const Scaffold(
+      appBar: StreamChannelHeader(showTypingIndicator: true),
       body: Column(
         children: <Widget>[
-          const Expanded(
+          Expanded(
             child: StreamMessageListView(),
           ),
-          StreamMessageInput(
-            onMessageSent: _sendFirebaseMessage,
-          ),
+          StreamMessageInput(),
         ],
       ),
     );
   }
 
-  Future<void> _sendFirebaseMessage(Message message) async {
+/*  Future<void> _sendFirebaseMessage(Message message) async {
     await FirebaseMessaging.instance.sendMessage(messageId: message.id, messageType: message.type, data: {
       'senderId': message.user?.id ?? 'UNKNOWN USER',
       'message': message.text ?? 'NO TEXT',
     });
     log.i(message);
-  }
+  }*/
 }
 
 //--------------------------------------------------------------------------------------
 
+/*
 class ChatsListPage extends StatefulWidget {
   const ChatsListPage({Key? key}) : super(key: key);
 
@@ -246,3 +241,4 @@ class _ChatsListPageState extends State<ChatsListPage> {
     }
   }
 }
+*/
