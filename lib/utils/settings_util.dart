@@ -103,6 +103,27 @@ class SettingsProvider extends ChangeNotifier {
     }
   }
 
+/*
+  String getAppIconPath() {
+    if (useSystemTheme) {
+      return SchedulerBinding.instance.platformDispatcher.platformBrightness == Brightness.light
+          ? 'assets/icons/himitsu_app_icon.png'
+          : 'assets/icons/himitsu_app_icon_dark.png';
+    }
+
+    switch (theme) {
+      case ThemeMode.system:
+        return SchedulerBinding.instance.platformDispatcher.platformBrightness == Brightness.light
+            ? 'assets/icons/himitsu_app_icon.png'
+            : 'assets/icons/himitsu_app_icon_dark.png';
+      case ThemeMode.light:
+        return 'assets/icons/himitsu_app_icon.png';
+      case ThemeMode.dark:
+        return 'assets/icons/himitsu_app_icon_dark.png';
+    }
+  }
+*/
+
   //endregion
 
   void resetSettings() {
@@ -172,17 +193,24 @@ class TextSize {
 // you use a lower version, some properties may not be supported. In
 // that case you can also remove them after copying the theme to your app.
 final ThemeData oekoLightTheme = FlexThemeData.light(
-  scheme: FlexScheme.blumineBlue,
+  scheme: FlexScheme.indigo,
   surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
   blendLevel: 9,
   appBarElevation: 4.0,
-  keyColors: const FlexKeyColors(
-    useSecondary: true,
-  ),
-
   subThemesData: const FlexSubThemesData(
+    buttonMinSize: Size(80.0, 40.0),
+    buttonPadding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+    textButtonRadius: 12.0,
+    elevatedButtonRadius: 12.0,
+    outlinedButtonRadius: 12.0,
+    toggleButtonsRadius: 12.0,
+    inputDecoratorRadius: 12.0,
     blendOnLevel: 10,
     blendOnColors: false,
+  ),
+  keyColors: const FlexKeyColors(
+    useSecondary: true,
+    useTertiary: true,
   ),
   visualDensity: FlexColorScheme.comfortablePlatformDensity,
   useMaterial3: true,
@@ -191,16 +219,25 @@ final ThemeData oekoLightTheme = FlexThemeData.light(
   fontFamily: GoogleFonts.poppins().fontFamily,
 );
 final ThemeData oekoDarkTheme = FlexThemeData.dark(
-  scheme: FlexScheme.blumineBlue,
+  scheme: FlexScheme.indigo,
   surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
   blendLevel: 15,
   appBarElevation: 4.0,
-  keyColors: const FlexKeyColors(
-    useSecondary: true,
-  ),
   subThemesData: const FlexSubThemesData(
+    buttonMinSize: Size(80.0, 40.0),
+    buttonPadding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+    textButtonRadius: 12.0,
+    elevatedButtonRadius: 12.0,
+    outlinedButtonRadius: 12.0,
+    toggleButtonsRadius: 12.0,
+    inputDecoratorRadius: 12.0,
     blendOnLevel: 20,
   ),
+  keyColors: const FlexKeyColors(
+    useSecondary: true,
+    useTertiary: true,
+  ),
+
   visualDensity: FlexColorScheme.comfortablePlatformDensity,
   useMaterial3: true,
   swapLegacyOnMaterial3: true,

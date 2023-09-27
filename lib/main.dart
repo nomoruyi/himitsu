@@ -1,31 +1,11 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:himitsu_app/app/app.dart';
+import 'package:himitsu_app/utils/env_util.dart';
+import 'package:himitsu_app/utils/firebase_util.dart';
 import 'package:himitsu_app/utils/hive_util.dart';
-import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:mime/mime.dart';
-import 'package:open_filex/open_filex.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:uuid/uuid.dart';
-
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
-
-  await initHive();
-
-  initializeDateFormatting().then((_) => runApp(const Himitsu()));
-}
-
-class MyApp extends StatelessWidget {
+import 'package:himitsu_app/utils/notification_util.dart';
+import 'package:himitsu_app/utils/stream_client_utilelessWidget {
   const MyApp({super.key});
 
   @override
@@ -48,7 +28,7 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     super.initState();
-    _loadMessages();
+    // _loadMessages();
   }
 
   @override
@@ -235,3 +215,4 @@ class _ChatPageState extends State<ChatPage> {
     });
   }
 }
+*/

@@ -19,6 +19,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:go_router/go_router.dart';
 import 'package:himitsu_app/app/app.dart';
+import 'package:himitsu_app/app/pages/auth/license_view.dart';
+import 'package:himitsu_app/app/pages/auth/login_view.dart';
+import 'package:himitsu_app/app/pages/base/chats_view.dart';
+import 'package:himitsu_app/app/pages/introduction/introduction_view.dart';
 import 'package:himitsu_app/utils/settings_util.dart';
 
 enum Routes {
@@ -26,11 +30,7 @@ enum Routes {
   introduction,
   license,
   login,
-  tours,
-  tour,
-  sort,
-  load_up,
-  station,
+  chats,
   settings,
   status,
   versionsProtocol,
@@ -50,7 +50,28 @@ final GoRouter router = GoRouter(
         if ('userLoggedIn' == '') return Routes.tour.name;
         return Routes.login.name;
       },*/
-      routes: [],
+      routes: [
+        GoRoute(
+          name: Routes.introduction.name,
+          path: Routes.introduction.name,
+          builder: (context, state) => const IntroductionView(),
+        ),
+        GoRoute(
+          name: Routes.license.name,
+          path: Routes.license.name,
+          builder: (context, state) => const LicenseView(),
+        ),
+        GoRoute(
+          name: Routes.login.name,
+          path: Routes.login.name,
+          builder: (context, state) => const LoginView(),
+        ),
+        GoRoute(
+          name: Routes.chats.name,
+          path: Routes.chats.name,
+          builder: (context, state) => const ChannelListPage(),
+        ),
+      ],
     ),
   ],
   errorBuilder: (context, state) => const ErrorScreen(),

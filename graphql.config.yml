@@ -1,0 +1,10 @@
+schema: schema.graphql
+
+extensions:
+  endpoints:
+    Default GraphQL Endpoint:
+      url: https://himitsu.hasura.app/v1/graphql
+      headers:
+        x-hasura-admin-secret: gn5eV7B8lAmO8s9FaNpS4Cd6beW06tBC9ETWnlIioJN3C7gtF4EPPVlH1PF9HpQG
+        user-agent: JS GraphQL
+      introspect: false

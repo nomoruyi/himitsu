@@ -5,11 +5,13 @@
     "next": "Next",
     "warning": "WARNING",
     "menu": {
+      "loadUpAll": "Load up all deliveries",
       "logout": "Logout",
       "settings": "Settings",
-      "finishTour": "Finish tour"
-    }
-
+      "finishTour": "Finish tour?"
+    },
+    "camera": "Camera",
+    "gallery": "Gallery"
   },
   "settings": {
     "": "Settings",
@@ -31,12 +33,13 @@
         "light": "Light",
         "dark": "Dark",
         "useSystemTheme": "Use system theme"
-
       }
     },
-
-    "info":{
+    "info": {
       "": "Info",
+      "appInfo": {
+        "": "App Info"
+      },
       "status": {
         "": "Status",
         "client": "Client",
@@ -53,7 +56,6 @@
         },
         "deviceID": "Device ID",
         "deviceName": "Device Name",
-
         "server": "Server",
         "serverStatus": {
           "": "Server status",
@@ -72,21 +74,23 @@
         "": "Imprint"
       }
     },
-
     "appInfo": {
       "": "App Information"
     }
-
   },
   "tour": {
     "": "Tour",
-    "deliveryDate": "Date",
+    "deliveryDate": "Delivery date",
     "loadUp": "Load up",
     "unload": "Unload",
     "deliver": "Deliver",
     "start": "Start",
+    "startLoad": "Start time load up:",
+    "startDeliver": "Start time deliver:",
     "end": "End",
-    "reverseDeliver": "revert delivery",
+    "endLoad": "End time load up:",
+    "endDeliver": "End time deliver:",
+    "callbackDelivery": "revert delivery",
     "selection": {
       "header": "Please select a tour"
     },
@@ -94,9 +98,16 @@
       "": "Driver Note",
       "content": "WARNING: This note is only for the driver of the current tour and will not be submitted to the backoffice"
     },
-    "deliveryNote": "Delivery Note",
-    "mileage":"Mileage",
-    "time": "Time"
+    "toDoNote": "Delivery note",
+    "deliveryNote": "General note",
+    "productNote": "Product note",
+    "mileage": "Mileage",
+    "mileageAtStart": "Mileage at the start of the tour",
+    "time": "Time",
+    "timeAtStart": "Time at the start of the tour",
+    "notYetEntered": "Not yet entered",
+    "tourFinished": "Tour has been completed successfully",
+    "enterMileage": "Please enter the mileage after you have completed the tour and returned to base."
   },
   "station": {
     "": "Station"
@@ -109,7 +120,6 @@
       "proceedWithoutLogin": "Proceed without login",
       "passwordMissing": "Password missing",
       "usernameMissing": "Username missing"
-
     },
     "logout": {
       "": "Ausloggen"
@@ -125,12 +135,14 @@
   "button": {
     "ok": "OK",
     "cancel": "Cancel",
+    "save": "Save",
     "back": "Back",
     "yes": "Yes",
     "no": "No",
     "skip": "Skip",
     "add": "Add",
     "downloadAgain": "No, download again",
+    "skipDownload": "Skip download",
     "addNote": "Add note",
     "edit": "Edit",
     "remove": "Remove",
@@ -138,37 +150,53 @@
     "listOfArticles": "List of all articles",
     "addBox": "Add box",
     "images": "Images",
-    "deposit": "Deposit"
+    "deposit": "Deposit",
+    "setAllToDelivered": "Set all tours as 'delivered'"
+  },
+  "notification": {
+    "title": {
+      "tourFinished": "Tour completed successfully",
+      "success": "Success"
+    },
+    "message": {
+      "uploadSuccessful": "The file has been uploaded successfully"
+    }
   },
   "popup": {
-    "warning": "Warning!",
-    "save": "Save changes?",
-    "delivery": {
-      "": "Delivery done?",
-      "content": "WARNING: Do not confirm this window until the delivery has arrived at the customer"
+    "title": {
+      "finishLoadUp": "Finish load up and start delivering?",
+      "finishDelivery": "Back to load up?",
+      "differentLocation": "New Location?",
+      "finishTour": "Finish tour",
+      "confirmDelivery": "Delivery completed?",
+      "navigateToBase": "Do you want to be navigated back to base?",
+      "noVehicleSelected": "Fahrzeug fehlt",
+      "editNote": "Edit note",
+      "addBox": "Add new box",
+      "allArticle": "All articles of this delivery",
+      "images": "Images",
+      "warning": "Warning!"
     },
-    "notifications": {
-      "": "Notifications",
-      "driverNote": "Driver note",
-      "tourNote": "Auf der Tour beachten",
-      "companyNote": "Tour note"
-    },
-    "logout":{
-      "content":  "Do you really want to logout?"
-    },
-    "tour": {
-      "content": "Do you want to abort this tour?",
+    "content": {
+      "finishLoadUp": "Not all boxes have been loaded up",
+      "differentLocation": "The location, on which you confirmed the delivery, is more than 50 meters away from the stored address. Do you want to set the current location as the location for this address?",
+      "logout": "Do you really want logout?",
+      "finishTour": "Do you really want to complete the tour?",
+      "abortTour": "Do you really want to abort the tour?",
+      "cancelSort": "Cancel sorting?",
+      "confirmDelivery": "WARNING: Only confirm this window, if you have completed this delivery",
+      "notAllStationsDelivered": "WARNING: Some of the stations haven't been marked as 'delivered'. Do you still want to finish this tour?",
+      "navigateToBase": "Do you want to be navigated back to base?",
+      "noVehicleSelected": "Please select a vehicle before completing this tour",
+      "editNote": "WARNING: This note is only for the driver of the current tour and will not be sent to the office",
       "alreadyAvailable": "This tour is already available on this device! Skip re-download?",
-      "download": "Do you want to download this tour?"
+      "downloadTour": "Do you want to download and start this tour?"
     },
-    "sort": {
-      "cancel": "Cancel sorting?"
-    },
-    "addBox": "Add new box",
-    "allArticle": "All articles of this delivery",
-    "images": "Images"
+    "save": "Save changes?"
   },
   "error": {
+    "": "Fehler",
+    "alreadyLoggedOnOtherDevice": "This user is already logged in on a different device",
     "usernameOrPasswordMissing": "Username or password are missing",
     "invalidPasswordOrUsername": "Username or password wrong",
     "http": {
@@ -180,7 +208,20 @@
     },
     "emptyText": "Please fill in the text field!",
     "invalidValue": "Please enter a valid value!",
-    "endMileageSmallerThanStart": "The mileage can't be smaller than at the start of the tour!"
-
+    "endMileageSmallerThanStart": "The mileage can't be smaller than at the start of the tour!",
+    "endLoadUpTimeBeforeStart": "The time at the start of loading up can't !",
+    "chooseOption": "Choose a valid option!",
+    "uploadFile": "The file could not be uploaded"
+  },
+  "enums": {
+    "tourStatus": {
+      "OPEN": "Open",
+      "LOADING": "Loading",
+      "LOADED": "Loaded",
+      "DELIVERING": "Delivering",
+      "DELIVERED": "Delivered",
+      "UNLOADING": "Unloading",
+      "COMPLETE": "Complete"
+    }
   }
 }

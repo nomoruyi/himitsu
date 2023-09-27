@@ -1,5 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:himitsu_app/backend/graphql_config.dart';
 import 'package:himitsu_app/models/auth_data_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

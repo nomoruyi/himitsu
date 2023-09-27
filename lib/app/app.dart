@@ -7,9 +7,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:himitsu_app/app/widgets/loading_widget.dart';
 import 'package:himitsu_app/blocs/auth_bloc/auth_bloc.dart';
+import 'package:himitsu_app/utils/env_util.dart';
+import 'package:himitsu_app/utils/notification_util.dart';
 import 'package:himitsu_app/utils/router_util.dart';
 import 'package:himitsu_app/utils/settings_util.dart';
+import 'package:himitsu_app/utils/stream_client_util.dart';
 import 'package:provider/provider.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class Himitsu extends StatelessWidget {
   const Himitsu({super.key});
@@ -21,7 +25,7 @@ class Himitsu extends StatelessWidget {
       builder: (context, child) {
         final settingsProvider = Provider.of<SettingsProvider>(context, listen: true);
 
-        WidgetsBinding.instance.window.platformDispatcher.onPlatformBrightnessChanged = () {
+        WidgetsBinding.instance.platformDispatcher.onPlatformBrightnessChanged = () {
           if (settingsProvider.useSystemTheme) {
             settingsProvider.theme =
                 ThemeMode.values.firstWhere((element) => element.name == SchedulerBinding.instance.platformDispatcher.platformBrightness.name);
@@ -35,11 +39,10 @@ class Himitsu extends StatelessWidget {
           child: MultiBlocProvider(
             providers: [
               // BlocProvider(create: (context) => NetworkBloc()..add(NetworkObserve())),
-              // BlocProvider(create: (context) => AuthBloc()),
-              // BlocProvider(create: (context) => TourBloc()),
+              BlocProvider(create: (context) => AuthBloc()),
             ],
             child: MaterialApp.router(
-              title: 'Driver App',
+              title: 'Himitsu',
               routerConfig: router,
               localizationsDelegates: [
                 FlutterI18nDelegate(
@@ -55,6 +58,7 @@ class Himitsu extends StatelessWidget {
               theme: oekoLightTheme,
               darkTheme: oekoDarkTheme,
               themeMode: settingsProvider.theme,
+              builder: (ctx, child) => StreamChat(client: ChatClientUtil.client, child: child),
             ),
           ),
         );
@@ -72,10 +76,20 @@ class MainView extends StatefulWidget {
 
 class _MainViewState extends State<MainView> {
   late final AuthBloc _initializationBloc = BlocProvider.of<AuthBloc>(context);
+  late final settingsProvider = Provider.of<SettingsProvider>(context, listen: true);
+
+  Future<void> _setupNotificationHandling() async {
+    log.i('Setup Notification!');
+    NotificationUtil.setForegroundNotificationListener();
+    NotificationUtil.setBackgroundNotificationListener();
+    NotificationUtil.setTerminatedNotificationListener();
+  }
 
   @override
   void initState() {
     super.initState();
+
+    _setupNotificationHandling();
 
     _initializationBloc.add(InitializeApp());
   }
@@ -90,9 +104,9 @@ class _MainViewState extends State<MainView> {
           listenWhen: (prev, current) => current is InitializationState,
           listener: (_, state) {
             if (state is ShowIntroductionSlides) {
-              context.pushNamed('introduction');
+              context.pushNamed(Routes.introduction.name);
             } else if (state is ShowLicenseView) {
-              context.pushNamed('license');
+              context.pushNamed(Routes.license.name);
 /*
             } else if (state is LogoutSuccessful) {
               while(context.canPop()) {
@@ -101,16 +115,18 @@ class _MainViewState extends State<MainView> {
               context.pushNamed('login');
 */
             } else if (state is ShowLoginView) {
-              context.pushNamed('login');
+              context.pushNamed(Routes.login.name);
             } else if (state is StartMainApp) {
-              context.pushNamed('tours');
+              context.pushNamed(Routes.chats.name);
             }
           },
-          child: const DriverLoadingWidget(
+          child: LoadingWidget(
             child: Scaffold(
               resizeToAvoidBottomInset: false,
               body: Center(
-                child: Image(image: AssetImage('assets/logos/oekobox-driver_logo.png')),
+                child: Image(
+                    image: AssetImage(
+                        settingsProvider.theme == ThemeMode.light ? 'assets/icons/himitsu_app_icon.png' : 'assets/icons/himitsu_app_icon.png')),
               ),
             ),
           ),

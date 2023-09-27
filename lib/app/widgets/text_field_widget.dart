@@ -137,15 +137,16 @@ class OekoTextField extends StatelessWidget {
 }
 
 class SwitchVisibilityIconButton extends StatelessWidget {
-  const SwitchVisibilityIconButton({Key? key, required this.onPressed, required this.value}) : super(key: key);
+  const SwitchVisibilityIconButton({Key? key, required this.onPressed, required this.value, this.size = 24}) : super(key: key);
 
   final void Function() onPressed;
   final bool value;
+  final double size;
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: value ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off_outlined),
+      icon: value ? Icon(Icons.visibility, size: size) : Icon(Icons.visibility_off_outlined, size: size),
       onPressed: onPressed,
     );
   }
