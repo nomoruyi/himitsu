@@ -30,7 +30,7 @@ abstract class FirebaseUtil {
 
     FirebaseMessaging.onBackgroundMessage(NotificationUtil.handleMessage);
 
-    log.i("Token saved: ${emptyResponse.duration}");
+    log.i('Token saved: ${emptyResponse.duration}');
 
 /*    FirebaseMessaging.instance.onTokenRefresh.listen((token) {
       log.i('New Token: $token');

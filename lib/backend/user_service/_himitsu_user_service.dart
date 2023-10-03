@@ -8,9 +8,9 @@ class HimitsuUserService implements UserService {
   Future<List<User>> getUsers() async {
     QueryResult result = await GraphQLConfig.instance.client.value.query(QueryOptions(
       fetchPolicy: FetchPolicy.noCache,
-      document: gql("""
+      document: gql('''
       
-      """),
+      '''),
     ));
 
     return <User>[];

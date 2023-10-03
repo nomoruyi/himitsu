@@ -37,7 +37,7 @@ class _ChannelListPageState extends State<ChannelListPage> {
       appBar: StreamChannelListHeader(
         client: ChatClientUtil.client,
         titleBuilder: (ctx, status, client) {
-          return Text("Hello ${ChatClientUtil.currentUser.user.name}");
+          return Text('Hello ${ChatClientUtil.currentUser.user.name}');
         },
         showConnectionStateTile: true,
         leading: Padding(
