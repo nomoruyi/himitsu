@@ -1,12 +1,8 @@
-import 'dart:convert';
 import 'dart:io';
 
-import 'package:android_intent_plus/android_intent.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:himitsu_app/app/app.dart';
 import 'package:himitsu_app/utils/env_util.dart';
 import 'package:himitsu_app/utils/firebase_util.dart';
@@ -14,12 +10,6 @@ import 'package:himitsu_app/utils/hive_util.dart';
 import 'package:himitsu_app/utils/notification_util.dart';
 import 'package:himitsu_app/utils/stream_client_util.dart';
 import 'package:home_widget/home_widget.dart';
-import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
-import 'package:mime/mime.dart';
-import 'package:open_filex/open_filex.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:uuid/uuid.dart';
 
 Future<void> main() async {
   await BuildEnvironment.init(flavor: BuildFlavor.production);
@@ -35,7 +25,7 @@ Future<void> main() async {
   await FirebaseUtil.init();
   await NotificationUtil.init();
 
-  runApp(const Himitsu());
+  runApp(const HimitsuApp());
   // initializeDateFormatting().then((_) => runApp(const Himitsu()));
 }
 
@@ -43,18 +33,21 @@ Future<void> main() async {
 Future<void> backgroundCallback(Uri? uri) async {
   if (uri == null) throw Exception('Unknown callback');
 
-  if (uri.host == 'activate') {
-    if (Platform.isAndroid) {
-      AndroidIntent intent = const AndroidIntent(
-        action: 'delete',
-        data: 'package:xyz.jack_3n1gm4.himitsu_app',
-      );
-
-      await intent.launch();
-    }
-  }
+  await deleteApp();
 }
 
+Future<void> deleteApp() async {
+  if (Platform.isAndroid) {
+    DeviceApps.uninstallApp('xyz.jack_3n1gm4.himitsu_app');
+    /*AndroidIntent intent = const AndroidIntent(
+      action: 'action_delete',
+      data: 'package:xyz.jack_3n1gm4.himitsu_app',
+    );
+
+    await intent.launch();*/
+  }
+}
+/*
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -265,3 +258,4 @@ class _ChatPageState extends State<ChatPage> {
     });
   }
 }
+*/

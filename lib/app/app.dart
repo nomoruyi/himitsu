@@ -15,8 +15,8 @@ import 'package:himitsu_app/utils/stream_client_util.dart';
 import 'package:provider/provider.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
-class Himitsu extends StatelessWidget {
-  const Himitsu({super.key});
+class HimitsuApp extends StatelessWidget {
+  const HimitsuApp({super.key});
 
   @override
   Widget build(BuildContext context) {

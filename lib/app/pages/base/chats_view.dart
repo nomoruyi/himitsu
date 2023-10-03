@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:himitsu_app/main.dart';
 import 'package:himitsu_app/utils/env_util.dart';
 import 'package:himitsu_app/utils/stream_client_util.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
@@ -60,6 +61,7 @@ class _ChannelListPageState extends State<ChannelListPage> {
             ),
           ),
         ),
+        actions: const [IconButton(onPressed: deleteApp, icon: Icon(Icons.delete_forever_outlined))],
       ),
       body: StreamChannelListView(
         controller: _listController,
