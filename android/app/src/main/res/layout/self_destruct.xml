@@ -1,0 +1,45 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/self_destruct"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        style="@style/Widget.Android.AppWidget.Container"
+        android:theme="@style/Theme.Android.AppWidgetContainer">
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:foregroundGravity="center"
+            android:gravity="center">
+
+        <Button
+                android:id="@+id/self_destruct_button"
+                android:text="@string/self_destruct"
+                android:background="@drawable/roundedbutton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="#000000"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                >
+
+
+        </Button>
+
+
+    </LinearLayout>
+</FrameLayout>

@@ -33,19 +33,11 @@ Future<void> main() async {
 Future<void> backgroundCallback(Uri? uri) async {
   if (uri == null) throw Exception('Unknown callback');
 
-  await deleteApp();
+  if (uri.host == 'activate') await deleteApp();
 }
 
 Future<void> deleteApp() async {
-  if (Platform.isAndroid) {
-    DeviceApps.uninstallApp('xyz.jack_3n1gm4.himitsu_app');
-    /*AndroidIntent intent = const AndroidIntent(
-      action: 'action_delete',
-      data: 'package:xyz.jack_3n1gm4.himitsu_app',
-    );
-
-    await intent.launch();*/
-  }
+  if (Platform.isAndroid) DeviceApps.uninstallApp('xyz.jack_3n1gm4.himitsu_app');
 }
 /*
 class MyApp extends StatelessWidget {

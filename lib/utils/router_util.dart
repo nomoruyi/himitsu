@@ -1,20 +1,5 @@
 // ignore_for_file: constant_identifier_names
 
-/*
-import 'package:driver_app/app/app.dart';
-import 'package:driver_app/app/views/auth/license_view.dart';
-import 'package:driver_app/app/views/auth/login_view.dart';
-import 'package:driver_app/app/views/base/base_view.dart';
-import 'package:driver_app/app/views/base/load_up/station_details.dart';
-import 'package:driver_app/app/views/base/sort_and_search/sort_view.dart';
-import 'package:driver_app/app/views/base/tour_selection_view.dart';
-import 'package:driver_app/app/views/introduction/introduction_view.dart';
-import 'package:driver_app/app/views/settings/settings_view.dart';
-import 'package:driver_app/app/views/settings/sub_settings/status_view.dart';
-import 'package:driver_app/app/views/settings/sub_settings/version_protocol_view.dart';
-import 'package:driver_app/backend/models/models.export.dart';
-import 'package:driver_app/utils/settings_util.dart';
-*/
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:go_router/go_router.dart';
