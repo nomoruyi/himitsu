@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:himitsu_app/main.dart';
 import 'package:himitsu_app/utils/env_util.dart';
+import 'package:himitsu_app/utils/router_util.dart';
 import 'package:himitsu_app/utils/stream_client_util.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
@@ -33,51 +35,58 @@ class _ChannelListPageState extends State<ChannelListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: StreamChannelListHeader(
-        client: ChatClientUtil.client,
-        titleBuilder: (ctx, status, client) {
-          return Text('Hello ${ChatClientUtil.currentUser.user.name}');
-        },
-        showConnectionStateTile: true,
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            width: 150,
-            height: 150,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.transparent,
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                image: NetworkImage(ChatClientUtil.currentUser.user.image ?? 'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png',
-                    scale: 1.0),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: StreamChannelListHeader(
+          client: ChatClientUtil.client,
+          titleBuilder: (ctx, status, client) {
+            return Text('Hello ${ChatClientUtil.currentUser.user.name}');
+          },
+          showConnectionStateTile: true,
+          leading: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: 150,
+              height: 150,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.transparent,
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: NetworkImage(
+                      ChatClientUtil.currentUser.user.image ?? 'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png',
+                      scale: 1.0),
+                ),
+              ),
+              child: InkWell(
+                onLongPress: () => log.i('open menu'),
+                onDoubleTap: () => log.i('delete all data?'),
+                borderRadius: const BorderRadius.all(Radius.circular(16.0)),
               ),
             ),
-            child: InkWell(
-              onLongPress: () => log.i('open menu'),
-              onDoubleTap: () => log.i('delete all data?'),
-              borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-            ),
           ),
+          actions: [
+            IconButton(onPressed: () => context.pushNamed(Routes.createChannel.name), icon: const Icon(Icons.add_circle_outline_outlined)),
+            const IconButton(onPressed: deleteApp, icon: Icon(Icons.delete_forever_outlined)),
+          ],
         ),
-        actions: const [IconButton(onPressed: deleteApp, icon: Icon(Icons.delete_forever_outlined))],
-      ),
-      body: StreamChannelListView(
-        controller: _listController,
-        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-        onChannelTap: (channel) {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) {
-                return StreamChannel(
-                  channel: channel,
-                  child: const ChannelPage(),
-                );
-              },
-            ),
-          );
-        },
+        body: StreamChannelListView(
+          controller: _listController,
+          physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          onChannelTap: (channel) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return StreamChannel(
+                    channel: channel,
+                    child: const ChannelPage(),
+                  );
+                },
+              ),
+            );
+          },
+        ),
       ),
     );
   }

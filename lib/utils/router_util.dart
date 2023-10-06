@@ -7,6 +7,7 @@ import 'package:himitsu_app/app/app.dart';
 import 'package:himitsu_app/app/pages/auth/license_view.dart';
 import 'package:himitsu_app/app/pages/auth/login_view.dart';
 import 'package:himitsu_app/app/pages/base/chats_view.dart';
+import 'package:himitsu_app/app/pages/base/create_channel_view.dart';
 import 'package:himitsu_app/app/pages/introduction/introduction_view.dart';
 import 'package:himitsu_app/utils/settings_util.dart';
 
@@ -22,6 +23,7 @@ enum Routes {
   userData,
   imprint,
   error,
+  createChannel,
 }
 
 final GoRouter router = GoRouter(
@@ -51,11 +53,13 @@ final GoRouter router = GoRouter(
           path: Routes.login.name,
           builder: (context, state) => const LoginView(),
         ),
-        GoRoute(
-          name: Routes.chats.name,
-          path: Routes.chats.name,
-          builder: (context, state) => const ChannelListPage(),
-        ),
+        GoRoute(name: Routes.chats.name, path: Routes.chats.name, builder: (context, state) => const ChannelListPage(), routes: [
+          GoRoute(
+            name: Routes.createChannel.name,
+            path: Routes.createChannel.name,
+            builder: (context, state) => const CreateChannelView(),
+          ),
+        ]),
       ],
     ),
   ],

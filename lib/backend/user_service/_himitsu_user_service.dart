@@ -1,19 +1,28 @@
-import 'package:flutter_chat_types/flutter_chat_types.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:himitsu_app/backend/graphql_config.dart';
+import 'package:himitsu_app/backend/user_service/_cache_user_service.dart';
 import 'package:himitsu_app/backend/user_service/user_service.dart';
+import 'package:himitsu_app/utils/stream_client_util.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class HimitsuUserService implements UserService {
-  @override
-  Future<List<User>> getUsers() async {
-    QueryResult result = await GraphQLConfig.instance.client.value.query(QueryOptions(
-      fetchPolicy: FetchPolicy.noCache,
-      document: gql('''
-      
-      '''),
-    ));
+  final CacheUserService cacheUserService;
 
-    return <User>[];
+  HimitsuUserService._internal(this.cacheUserService);
+  static final HimitsuUserService instance = HimitsuUserService._internal(CacheUserService.instance);
+
+  @override
+  Future<List<User>> getUsers({Filter? filter, List<SortOption>? sort, PaginationParams? pagination}) async {
+    final QueryUsersResponse result = await ChatClientUtil.client.queryUsers(
+      filter: filter,
+      sort: sort ?? const [SortOption('id')],
+      pagination: pagination ?? const PaginationParams(offset: 0, limit: 20),
+    );
+
+    return result.users;
+  }
+
+  @override
+  Future<User> getUser() async {
+    return User(id: '');
   }
 
   @override
