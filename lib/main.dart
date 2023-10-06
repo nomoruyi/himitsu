@@ -19,7 +19,7 @@ Future<void> main() async {
   HomeWidget.widgetClicked.listen(backgroundCallback);
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
 
-  await ChatClientUtil.init();
+  await ClientUtil.init();
 
   await HiveUtil.init();
   await FirebaseUtil.init();

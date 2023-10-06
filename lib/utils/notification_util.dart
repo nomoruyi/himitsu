@@ -119,9 +119,9 @@ abstract class NotificationUtil {
   @pragma('vm:entry-point')
   static Future<void> handleMessage(RemoteMessage message) async {
     // String userId = message.data['id'];
-    ChatClientUtil.client.connectUser(
-      ChatClientUtil.currentUser.user,
-      ChatClientUtil.currentUser.token,
+    ClientUtil.client.connectUser(
+      ClientUtil.currentUser.user,
+      ClientUtil.currentUser.token,
       connectWebSocket: false,
     );
 
@@ -130,7 +130,7 @@ abstract class NotificationUtil {
     final Map<String, dynamic> data = message.data;
 
     final String messageId = data['id'];
-    final GetMessageResponse response = await ChatClientUtil.client.getMessage(messageId);
+    final GetMessageResponse response = await ClientUtil.client.getMessage(messageId);
 
     if (flutterLocalNotificationsPlugin == null) {
       await init();
@@ -151,7 +151,7 @@ abstract class NotificationUtil {
 
     if (authData == null) return false;
 
-    if (receiverId == null || receiverId == ChatClientUtil.currentUser.user.id) return true;
+    if (receiverId == null || receiverId == ClientUtil.currentUser.user.id) return true;
 
     return false;
   }

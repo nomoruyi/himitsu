@@ -39,9 +39,9 @@ class _ChannelListPageState extends State<ChannelListPage> {
       onWillPop: () async => false,
       child: Scaffold(
         appBar: StreamChannelListHeader(
-          client: ChatClientUtil.client,
+          client: ClientUtil.client,
           titleBuilder: (ctx, status, client) {
-            return Text('Hello ${ChatClientUtil.currentUser.user.name}');
+            return Text('Hello ${ClientUtil.currentUser.user.name}');
           },
           showConnectionStateTile: true,
           leading: Padding(
@@ -54,8 +54,7 @@ class _ChannelListPageState extends State<ChannelListPage> {
                 color: Colors.transparent,
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: NetworkImage(
-                      ChatClientUtil.currentUser.user.image ?? 'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png',
+                  image: NetworkImage(ClientUtil.currentUser.user.image ?? 'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png',
                       scale: 1.0),
                 ),
               ),

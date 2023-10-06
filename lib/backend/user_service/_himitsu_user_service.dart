@@ -11,7 +11,7 @@ class HimitsuUserService implements UserService {
 
   @override
   Future<List<User>> getUsers({Filter? filter, List<SortOption>? sort, PaginationParams? pagination}) async {
-    final QueryUsersResponse result = await ChatClientUtil.client.queryUsers(
+    final QueryUsersResponse result = await ClientUtil.client.queryUsers(
       filter: filter,
       sort: sort ?? const [SortOption('id')],
       pagination: pagination ?? const PaginationParams(offset: 0, limit: 20),

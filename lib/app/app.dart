@@ -7,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:himitsu_app/app/widgets/loading_widget.dart';
 import 'package:himitsu_app/blocs/auth_bloc/auth_bloc.dart';
+import 'package:himitsu_app/blocs/channel_bloc/channel_bloc.dart';
 import 'package:himitsu_app/blocs/user_bloc/user_bloc.dart';
 import 'package:himitsu_app/utils/env_util.dart';
 import 'package:himitsu_app/utils/notification_util.dart';
@@ -42,6 +43,7 @@ class HimitsuApp extends StatelessWidget {
               // BlocProvider(create: (context) => NetworkBloc()..add(NetworkObserve())),
               BlocProvider(create: (context) => AuthBloc()),
               BlocProvider(create: (context) => UserBloc()),
+              BlocProvider(create: (context) => ChannelBloc()),
             ],
             child: MaterialApp.router(
               title: 'Himitsu',
@@ -60,7 +62,7 @@ class HimitsuApp extends StatelessWidget {
               theme: oekoLightTheme,
               darkTheme: oekoDarkTheme,
               themeMode: settingsProvider.theme,
-              builder: (ctx, child) => StreamChat(client: ChatClientUtil.client, child: child),
+              builder: (ctx, child) => StreamChat(client: ClientUtil.client, child: child),
             ),
           ),
         );

@@ -1,7 +1,7 @@
 import 'package:himitsu_app/utils/env_util.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
-abstract class ChatClientUtil {
+abstract class ClientUtil {
   static final StreamChatClient client = StreamChatClient('g5uquupz9smh', logLevel: Level.FINE);
 
   static ({User user, String token}) currentUser = (

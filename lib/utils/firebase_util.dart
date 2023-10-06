@@ -26,7 +26,7 @@ abstract class FirebaseUtil {
 
     if (token == null) throw Exception('Missing Firebase Token!');
 
-    EmptyResponse emptyResponse = await ChatClientUtil.client.addDevice(token, PushProvider.firebase, pushProviderName: 'himitsu-firebase');
+    EmptyResponse emptyResponse = await ClientUtil.client.addDevice(token, PushProvider.firebase, pushProviderName: 'himitsu-firebase');
 
     FirebaseMessaging.onBackgroundMessage(NotificationUtil.handleMessage);
 

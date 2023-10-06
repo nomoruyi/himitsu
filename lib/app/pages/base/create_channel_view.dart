@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:himitsu_app/blocs/channel_bloc/channel_bloc.dart';
 import 'package:himitsu_app/blocs/user_bloc/user_bloc.dart';
 import 'package:himitsu_app/utils/dialog_util.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
@@ -14,9 +15,10 @@ class CreateChannelView extends StatefulWidget {
 
 class _CreateChannelViewState extends State<CreateChannelView> {
   late final UserBloc _userBloc = BlocProvider.of<UserBloc>(context);
-  final TextEditingController idController = TextEditingController();
+  late final ChannelBloc _channelBloc = BlocProvider.of<ChannelBloc>(context);
 
-  final List<User> addedUsersNotifier = [];
+  final TextEditingController idController = TextEditingController();
+  final List<User> addedUsers = [];
 
   void addUser() {
     final String input = idController.text.trim();
@@ -27,13 +29,16 @@ class _CreateChannelViewState extends State<CreateChannelView> {
   }
 
   void createChannel() {
-    if (addedUsersNotifier.isEmpty) return;
+    if (addedUsers.isEmpty) return;
 
-/*    if(addedUsersNotifier.length == 1){
-      _channelBloc.add(CreateDirektChannel());
-    } else{
-      _channelBloc.add(CreateMultiChannel());
-    }*/
+    final bool isMulti = (addedUsers.length > 1);
+    final String? name = 'new Channel';
+
+    if (isMulti) {
+      // get Name from Dialog
+    }
+
+    _channelBloc.add(CreateChannel(name, multi: (addedUsers.length > 1), users: addedUsers));
   }
 
   @override
@@ -45,7 +50,7 @@ class _CreateChannelViewState extends State<CreateChannelView> {
           idController.clear();
 
           if (state is UserFound) {
-            addedUsersNotifier.add(state.user);
+            addedUsers.add(state.user);
           } else if (state is UserNotFound) {
             FlushbarUtil.error(
               context,
@@ -68,17 +73,17 @@ class _CreateChannelViewState extends State<CreateChannelView> {
                 icon: const Icon(Icons.add),
               ),
               IconButton(
-                onPressed: addedUsersNotifier.isEmpty ? null : createChannel,
+                onPressed: addedUsers.isEmpty ? null : createChannel,
                 icon: const Icon(Icons.send_and_archive),
               )
             ],
           ),
           body: ListView.separated(
-            itemCount: addedUsersNotifier.length,
+            itemCount: addedUsers.length,
             itemBuilder: (context, index) {
               return ListTile(
-                  leading: Image.network(addedUsersNotifier[index].image ?? 'https://cdn-icons-png.flaticon.com/512/1946/1946429.png'),
-                  title: Text(addedUsersNotifier[index].name),
+                  leading: Image.network(addedUsers[index].image ?? 'https://cdn-icons-png.flaticon.com/512/1946/1946429.png'),
+                  title: Text(addedUsers[index].name),
                   trailing: Text((index + 1).toString()));
             },
             separatorBuilder: (BuildContext context, int index) => const Divider(),
