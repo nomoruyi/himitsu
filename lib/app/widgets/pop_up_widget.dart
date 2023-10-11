@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:himitsu_app/utils/settings_util.dart';
 
-class OekoPopUp extends StatelessWidget {
-  const OekoPopUp({Key? key, required this.title, required this.content, required this.actions}) : super(key: key);
+class HimitsuPopUp extends StatelessWidget {
+  const HimitsuPopUp({Key? key, required this.title, this.content, required this.actions}) : super(key: key);
 
   //region VARIABLES
-  final String title;
-  final String content;
+  final Widget title;
+  final Widget? content;
   final List<Widget> actions;
 
   //endregion
@@ -14,16 +13,16 @@ class OekoPopUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(title, style: TextStyle(fontSize: TextSize.extraLarge)),
-      content: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
-        child: Text(content, style: TextStyle(fontSize: TextSize.large)),
-      ),
+      // backgroundColor: Colors.transparent,
+      shadowColor: Theme.of(context).shadowColor,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 16),
+      title: title,
+      contentPadding: content == null ? null : const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0),
+      content: content,
       actions: actions,
-      actionsAlignment: MainAxisAlignment.spaceAround,
+      actionsPadding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+      actionsAlignment: MainAxisAlignment.spaceEvenly,
+      actionsOverflowAlignment: OverflowBarAlignment.center,
     );
   }
-
-  //region WIDGETS
-  //endregion
 }

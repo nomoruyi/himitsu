@@ -43,7 +43,7 @@ class HimitsuApp extends StatelessWidget {
               // BlocProvider(create: (context) => NetworkBloc()..add(NetworkObserve())),
               BlocProvider(create: (context) => AuthBloc()),
               BlocProvider(create: (context) => UserBloc()),
-              BlocProvider(create: (context) => ChannelBloc()),
+              BlocProvider(create: (context) => HChannelBloc()),
             ],
             child: MaterialApp.router(
               title: 'Himitsu',

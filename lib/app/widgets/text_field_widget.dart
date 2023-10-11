@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:himitsu_app/utils/settings_util.dart';
 
-class OekoTextField extends StatelessWidget {
-  const OekoTextField({
+class HimitsuTextField extends StatelessWidget {
+  const HimitsuTextField({
     Key? key,
     this.initialValue,
     required this.controller,
@@ -76,7 +76,7 @@ class OekoTextField extends StatelessWidget {
         autocorrect: !isPassword,
         controller: controller,
         validator: (value) => validator!(value),
-        style: TextStyle(color: Theme.of(context).colorScheme.background, fontSize: TextSize.medium, overflow: textOverflow),
+        style: TextStyle(fontSize: TextSize.medium, overflow: textOverflow),
         decoration: InputDecoration(
           isDense: true,
           label: Text(hintText ?? '',
@@ -89,11 +89,11 @@ class OekoTextField extends StatelessWidget {
               )),
           labelStyle: TextStyle(
             fontSize: TextSize.small,
-            // color: Theme.of(context).backgroundColor.withOpacity(0.5),
+            color: Theme.of(context).colorScheme.tertiary.withOpacity(0.5),
             fontWeight: FontWeight.w100, /*height: 2,*/
           ),
           hintStyle: TextStyle(
-            // color: Theme.of(context).backgroundColor.withOpacity(0.5),
+            color: Theme.of(context).colorScheme.tertiary.withOpacity(0.5),
             fontSize: TextSize.small,
             fontWeight: FontWeight.w100,
             overflow: TextOverflow.fade, /*height: 2,*/
@@ -117,13 +117,13 @@ class OekoTextField extends StatelessWidget {
           filled: true,
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(32.0),
-            borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 1.0),
+            borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 1.0),
           ),
 
           //hintText: hintText,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(32.0),
-            borderSide: const BorderSide(color: oekoSnow, width: 1.0),
+            borderSide: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1.0),
           ),
           disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(32.0),

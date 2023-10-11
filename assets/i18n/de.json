@@ -164,33 +164,12 @@
   },
   "popup": {
     "title": {
-      "finishLoadUp": "Beladen beenden und Ausliefern beginnen?",
-      "finishDelivery": "Zum Beladen zurückkehren?",
-      "differentLocation": "Neuer Standort?",
-      "finishTour": "Tour beenden",
-      "confirmDelivery": "Lieferung abgeschlossen?",
-      "navigateToBase": "Willst du dich zurück nach Hause navigieren lassen?",
-      "noVehicleSelected": "Fahrzeug fehlt",
-      "editNote": "Notiz bearbeiten",
-      "addBox": "Neue Kiste hinzufügen",
-      "allArticle": "Alle Artikel dieser Lieferung",
       "images": "Bilder",
-      "warning": "Achtung!"
+      "warning": "Achtung!",
+      "channelName": "Channel Name:"
     },
     "content": {
-      "finishLoadUp": "Es wurden nicht alle Boxen eingeladen",
-      "differentLocation": "Der Standort, an dem du die Lieferung bestätigt hast, befindet sich mehr als 50 Meter von dem hinterlegten Standort. Soll der aktueller Standort hinterlegt werden?",
-      "finishTour": "Willst du die Tour wirklich beenden?",
-      "logout": "Willst du dich wirklich abmelden?",
-      "abortTour": "Willst du die Tour wirklich abbrechen?",
-      "cancelSort": "Sortieren abbrechen?",
-      "confirmDelivery": "ACHTUNG: Bestätige dieses Fenster erst, wenn die Lieferung beim Kunden angekommen ist",
-      "notAllStationsDelivered": "ACHTUNG: Es wurden noch nicht alle Stationen als 'ausgeliefert' markiert. Möchtest du die Tour dennoch beenden?",
-      "navigateToBase": "Willst du dich zurück nach Hause navigieren lassen?",
-      "noVehicleSelected": "Bitte wähle ein Fahrzeug aus, bevor du die Tour beendest",
-      "editNote": "ACHTUNG: Diese Notiz ist nur für den Fahrer der aktuellen Tour und wird nicht ans Büro übermittelt",
-      "alreadyAvailable": "Diese Tour ist bereits auf deinem Gerät verfügbar! Download überspringen?",
-      "downloadTour": "Willst du diese Tour herunterladen und starten?"
+      "channelName": "Wähle einen Namen für diesen Channel"
     },
     "save": "Änderungen speichern?"
   },
