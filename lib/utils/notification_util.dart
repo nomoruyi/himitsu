@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:himitsu_app/backend/auth_service/auth_service.dart';
 import 'package:himitsu_app/models/auth_data_model.dart';
+import 'package:himitsu_app/utils/client_util.dart';
 import 'package:himitsu_app/utils/env_util.dart';
-import 'package:himitsu_app/utils/stream_client_util.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 abstract class NotificationUtil {

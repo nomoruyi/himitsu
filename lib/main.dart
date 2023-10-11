@@ -4,11 +4,11 @@ import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:himitsu_app/app/app.dart';
+import 'package:himitsu_app/utils/client_util.dart';
 import 'package:himitsu_app/utils/env_util.dart';
 import 'package:himitsu_app/utils/firebase_util.dart';
 import 'package:himitsu_app/utils/hive_util.dart';
 import 'package:himitsu_app/utils/notification_util.dart';
-import 'package:himitsu_app/utils/stream_client_util.dart';
 import 'package:home_widget/home_widget.dart';
 
 Future<void> main() async {

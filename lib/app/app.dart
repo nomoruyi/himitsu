@@ -9,11 +9,11 @@ import 'package:himitsu_app/app/widgets/loading_widget.dart';
 import 'package:himitsu_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:himitsu_app/blocs/channel_bloc/channel_bloc.dart';
 import 'package:himitsu_app/blocs/user_bloc/user_bloc.dart';
+import 'package:himitsu_app/utils/client_util.dart';
 import 'package:himitsu_app/utils/env_util.dart';
 import 'package:himitsu_app/utils/notification_util.dart';
 import 'package:himitsu_app/utils/router_util.dart';
 import 'package:himitsu_app/utils/settings_util.dart';
-import 'package:himitsu_app/utils/stream_client_util.dart';
 import 'package:provider/provider.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 

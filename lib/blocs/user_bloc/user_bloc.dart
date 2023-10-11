@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:himitsu_app/backend/user_service/_himitsu_user_service.dart';
+import 'package:himitsu_app/utils/client_util.dart';
 import 'package:himitsu_app/utils/env_util.dart';
-import 'package:himitsu_app/utils/stream_client_util.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 part 'user_event.dart';

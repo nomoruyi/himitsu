@@ -1,6 +1,6 @@
 import 'package:himitsu_app/backend/user_service/_cache_user_service.dart';
 import 'package:himitsu_app/backend/user_service/user_service.dart';
-import 'package:himitsu_app/utils/stream_client_util.dart';
+import 'package:himitsu_app/utils/client_util.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class HimitsuUserService implements UserService {

@@ -1,6 +1,6 @@
 import 'package:himitsu_app/backend/channel_service/_cache_channel_service.dart';
 import 'package:himitsu_app/backend/channel_service/channel_service.dart';
-import 'package:himitsu_app/utils/stream_client_util.dart';
+import 'package:himitsu_app/utils/client_util.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class HimitsuChannelService implements ChannelService {

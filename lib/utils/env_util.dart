@@ -47,6 +47,7 @@ class BuildEnvironment {
   late final String baseUrl;
   late final String apiUrl;
   late final String filesUrl;
+  late final String apiKey;
 
   late final Map<String, dynamic> deviceData;
 
@@ -62,6 +63,7 @@ class BuildEnvironment {
 
   static Future<void> _setVariables(BuildFlavor environment) async {
     DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+    _env.apiKey = dotenv.env['STREAM_API_KEY']!;
 
     try {
       if (kIsWeb) {

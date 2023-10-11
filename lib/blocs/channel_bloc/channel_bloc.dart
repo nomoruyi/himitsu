@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:himitsu_app/backend/channel_service/_himitsu_channel_service.dart';
-import 'package:himitsu_app/utils/stream_client_util.dart';
+import 'package:himitsu_app/utils/client_util.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 part 'channel_event.dart';
