@@ -25,7 +25,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       return;
     }
 
-    if (users.first.id == ClientUtil.currentUser.user.id) {
+    if (users.first.id == ClientUtil.user.id) {
       //TODO: Logged in user error
       emit(UserNotFound());
       return;

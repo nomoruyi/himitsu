@@ -1,9 +1,13 @@
+import 'dart:io';
+
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:himitsu_app/main.dart';
 import 'package:himitsu_app/utils/client_util.dart';
 import 'package:himitsu_app/utils/env_util.dart';
 import 'package:himitsu_app/utils/router_util.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class ChannelListPage extends StatefulWidget {
@@ -18,9 +22,21 @@ class ChannelListPage extends StatefulWidget {
 class _ChannelListPageState extends State<ChannelListPage> {
   late final StreamChannelListController _listController;
 
+  Future<void> _batteryOptimization() async {
+    final PermissionStatus batteryOptimizationPermission = await Permission.ignoreBatteryOptimizations.request();
+
+    if (batteryOptimizationPermission != PermissionStatus.granted && Platform.isAndroid) {
+      await AppSettings.openAppSettings(type: AppSettingsType.batteryOptimization);
+      _batteryOptimization();
+
+      return;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    _batteryOptimization();
 
     _listController = StreamChannelListController(
       client: StreamChat.of(context).client,
@@ -41,7 +57,7 @@ class _ChannelListPageState extends State<ChannelListPage> {
         appBar: StreamChannelListHeader(
           client: ClientUtil.client,
           titleBuilder: (ctx, status, client) {
-            return Text('Hello ${ClientUtil.currentUser.user.name}');
+            return Text('Hello ${ClientUtil.user.name}');
           },
           showConnectionStateTile: true,
           leading: Padding(
@@ -54,8 +70,7 @@ class _ChannelListPageState extends State<ChannelListPage> {
                 color: Colors.transparent,
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: NetworkImage(ClientUtil.currentUser.user.image ?? 'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png',
-                      scale: 1.0),
+                  image: NetworkImage(ClientUtil.user.image ?? 'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png', scale: 1.0),
                 ),
               ),
               child: InkWell(

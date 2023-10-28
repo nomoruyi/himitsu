@@ -53,7 +53,7 @@ class _IntroductionViewState extends State<IntroductionView> {
 
     for (ValueNotifier permission in _permissions) {
       permission.addListener(() => setState(() {
-            log.wtf('DIGGA WTF');
+            log.f('DIGGA WTF');
           }));
     }
   }
@@ -87,7 +87,8 @@ class _IntroductionViewState extends State<IntroductionView> {
   }
 
   //region WIDGETS
-  Widget _buildFirstSlide() {
+  /*
+ Widget _buildFirstSlide() {
     return Scaffold(
       body: Center(
           child: Text(
@@ -116,6 +117,7 @@ class _IntroductionViewState extends State<IntroductionView> {
       )),
     );
   }
+  */
 
 //endregion
 }

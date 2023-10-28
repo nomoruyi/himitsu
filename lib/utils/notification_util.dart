@@ -120,8 +120,8 @@ abstract class NotificationUtil {
   static Future<void> handleMessage(RemoteMessage message) async {
     // String userId = message.data['id'];
     ClientUtil.client.connectUser(
-      ClientUtil.currentUser.user,
-      ClientUtil.currentUser.token,
+      ClientUtil.user,
+      ClientUtil.token,
       connectWebSocket: false,
     );
 
@@ -151,7 +151,7 @@ abstract class NotificationUtil {
 
     if (authData == null) return false;
 
-    if (receiverId == null || receiverId == ClientUtil.currentUser.user.id) return true;
+    if (receiverId == null || receiverId == ClientUtil.user.id) return true;
 
     return false;
   }

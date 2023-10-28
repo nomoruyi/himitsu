@@ -11,4 +11,5 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- Permissions options for the `ignoreBatteryOptimizations` group -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
 </manifest>

@@ -9,7 +9,7 @@ class AuthData extends HiveObject with EquatableMixin {
   @HiveField(0)
   late bool firstInitialization;
   @HiveField(1)
-  late OwnUser? user;
+  late User? user;
   @HiveField(3)
   late String? token;
 

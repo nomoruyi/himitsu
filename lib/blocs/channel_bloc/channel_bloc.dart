@@ -15,7 +15,7 @@ class HChannelBloc extends Bloc<HChannelEvent, HChannelState> {
   }
 
   Future<void> _onCreateChannel(CreateChannel event, Emitter<HChannelState> emit) async {
-    event.users.add(ClientUtil.currentUser.user);
+    event.users.add(ClientUtil.user);
 
     HimitsuChannelService.instance
         .createChannel(event.name, type: event.type, users: event.users)

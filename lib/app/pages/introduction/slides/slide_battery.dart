@@ -7,7 +7,7 @@ class BatteryOptimizationSlide extends StatelessWidget {
 
   // TODO: Permission should NOT be granted
   Future<void> _requestIgnoreBatteryOptimizationPermission() async {
-    status.value = await Permission.ignoreBatteryOptimizations.status;
+    status.value = await Permission.ignoreBatteryOptimizations.request();
 
     if (status.value != PermissionStatus.granted) {
       await AppSettings.openAppSettings(type: AppSettingsType.batteryOptimization);

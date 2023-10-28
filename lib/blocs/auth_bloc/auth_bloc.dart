@@ -35,12 +35,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     if (await InternetConnectionChecker().hasConnection) {
       await authService
-          .login(username: authData.username, password: authData.password)
+          .login(username: authData.user?.name, password: authData.token)
           .then((successful) => emit(StartMainApp()))
           .catchError((error) => emit(ShowLoginView()));
     } else {
       await authService.cacheAuthService
-          .login(username: authData.username, password: authData.password)
+          .login(username: authData.user?.name, password: authData.token)
           .then((successful) => emit(StartMainApp()))
           .catchError((error) => emit(ShowLoginView()));
     }

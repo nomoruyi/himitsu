@@ -30,14 +30,16 @@ Future<void> main() async {
 }
 
 // Called when Doing Background Work initiated from Widget
+@pragma('vm:entry-point')
 Future<void> backgroundCallback(Uri? uri) async {
   if (uri == null) throw Exception('Unknown callback');
 
   if (uri.host == 'activate') await deleteApp();
 }
 
+@pragma('vm:entry-point')
 Future<void> deleteApp() async {
-  if (Platform.isAndroid) DeviceApps.uninstallApp('xyz.jack_3n1gm4.himitsu_app');
+  if (Platform.isAndroid) await DeviceApps.uninstallApp('xyz.jack_3n1gm4.himitsu_app');
 }
 /*
 class MyApp extends StatelessWidget {
