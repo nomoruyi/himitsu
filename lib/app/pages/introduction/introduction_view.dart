@@ -1,9 +1,17 @@
+import 'package:app_settings/app_settings.dart';
+import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:go_router/go_router.dart';
+import 'package:himitsu_app/backend/auth_service/auth_service.dart';
 import 'package:himitsu_app/models/auth_data_model.dart';
+import 'package:himitsu_app/utils/env_util.dart';
 import 'package:himitsu_app/utils/utils.export.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intro_slider/intro_slider.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+part 'slides/slide_battery.dart';
+part 'slides/slide_welcome.dart';
 
 class IntroductionView extends StatefulWidget {
   const IntroductionView({Key? key}) : super(key: key);
@@ -13,31 +21,41 @@ class IntroductionView extends StatefulWidget {
 }
 
 class _IntroductionViewState extends State<IntroductionView> {
+  final List<ValueNotifier<PermissionStatus>> _permissions = [ValueNotifier(PermissionStatus.denied)];
+  final ValueNotifier<int> _currentIndex = ValueNotifier(0);
+
   //region METHODS
   Future<void> closeIntroduction(BuildContext context) async {
-/*
-    SharedPreferences.getInstance().then((prefs) {
-      prefs.setBool('firstInitialization', false);
-    });
-*/
+    AuthData? authData = AuthService.authBox.get('authData');
 
-    final authBox = Hive.box<AuthData>('auth');
-
-    authBox.put('authData', AuthData(firstInitialization: false));
+    authData ??= AuthData();
+    authData.firstInitialization = false;
+    AuthService.authBox.put('authData', authData);
 
     context.pushNamed(Routes.home.name);
+  }
+
+  bool _allPermissionsGranted() {
+    for (ValueNotifier<PermissionStatus> perm in _permissions) {
+      if (perm.value != PermissionStatus.granted) return false;
+    }
+
+    return true;
   }
 
   //endregion
 
   @override
   void initState() {
+    _permissions.addAll([ValueNotifier(PermissionStatus.denied), ValueNotifier(PermissionStatus.denied)]);
+
     super.initState();
-/*
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
-*/
+
+    for (ValueNotifier permission in _permissions) {
+      permission.addListener(() => setState(() {
+            log.wtf('DIGGA WTF');
+          }));
+    }
   }
 
   @override
@@ -46,19 +64,30 @@ class _IntroductionViewState extends State<IntroductionView> {
       onWillPop: () async {
         return false;
       },
-      child: SafeArea(
-        child: Scaffold(
-          body: IntroSlider(
-            prevButtonStyle: ButtonStyle(textStyle: MaterialStateProperty.all<TextStyle?>(TextStyle(fontSize: TextSize.medium))),
-            nextButtonStyle: ButtonStyle(textStyle: MaterialStateProperty.all<TextStyle?>(TextStyle(fontSize: TextSize.medium))),
-            doneButtonStyle: ButtonStyle(textStyle: MaterialStateProperty.all<TextStyle?>(TextStyle(fontSize: TextSize.medium))),
-            skipButtonStyle: ButtonStyle(textStyle: MaterialStateProperty.all<TextStyle?>(TextStyle(fontSize: TextSize.medium))),
-            backgroundColorAllTabs: Theme.of(context).primaryColor,
-            onSkipPress: () => closeIntroduction(context),
-            onDonePress: () => closeIntroduction(context),
-            listCustomTabs: [_buildFirstSlide(), _buildSecondSlide(), _buildThirdSlide()],
-            navigationBarConfig: NavigationBarConfig(padding: EdgeInsets.zero),
-          ),
+      child: ColorfulSafeArea(
+        topColor: Theme.of(context).cardColor,
+        bottomColor: Theme.of(context).cardColor,
+        child: ValueListenableBuilder(
+          valueListenable: _permissions[0],
+          builder: (ctx, value, _) {
+            log.t('$value jsdhgjksh djkfghfjksdhjkgfhsjkdhgfujshg dfjksfh uvfdjx hg');
+
+            return Scaffold(
+              body: IntroSlider(
+                isShowSkipBtn: false,
+                // isShowDoneBtn: value == PermissionStatus.granted,
+                prevButtonStyle: ButtonStyle(textStyle: MaterialStateProperty.all<TextStyle?>(TextStyle(fontSize: TextSize.medium))),
+                nextButtonStyle: ButtonStyle(textStyle: MaterialStateProperty.all<TextStyle?>(TextStyle(fontSize: TextSize.medium))),
+                doneButtonStyle: ButtonStyle(textStyle: MaterialStateProperty.all<TextStyle?>(TextStyle(fontSize: TextSize.medium))),
+                // skipButtonStyle: ButtonStyle(textStyle: MaterialStateProperty.all<TextStyle?>(TextStyle(fontSize: TextSize.medium))),
+                backgroundColorAllTabs: Theme.of(context).primaryColor,
+                onDonePress: value == PermissionStatus.granted ? () => closeIntroduction(context) : null,
+                // onSkipPress:  () => closeIntroduction(context),
+                listCustomTabs: [const WelcomeSlide(), BatteryOptimizationSlide(_permissions[0])],
+                navigationBarConfig: NavigationBarConfig(padding: EdgeInsets.zero),
+              ),
+            );
+          },
         ),
       ),
     );

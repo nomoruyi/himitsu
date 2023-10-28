@@ -13,6 +13,17 @@
     "camera": "Kamera",
     "gallery": "Galerie"
   },
+  "introduction": {
+    "welcome": {
+      "title": "HIMITSU",
+      "content": "Willkommen bei \"Himitsu\" - Deiner ultimativen Chat-App für Privatsphäre und Datensicherheit!\n\nDeine Sicherheit und Privatsphäre stehen bei uns an erster Stelle. Mit Himitsu kannst Du bedenkenlos und vertraulich kommunizieren, ohne Dir Gedanken über die Sicherheit Deiner Daten machen zu müssen. Unsere App bietet Dir:\n\n\uD83D\uDD12 Verschlüsselte Datenübertragung: Jede Nachricht, die Du sendest, wird sicher verschlüsselt, um sicherzustellen, dass nur Du und Dein Gesprächspartner Zugang zu den Inhalten haben.\n\n\uD83D\uDD25 Selbstzerstörungsbutton: Deine Privatsphäre ist in Deinen Händen. Mit nur zwei einfachen Klicks kannst Du nicht nur die App, sondern auch sämtliche damit verbundenen Daten von Deinem Gerät löschen – ein Höchstmaß an Kontrolle über Deine Kommunikation.\n\n\uD83D\uDEAB Keine ungewollten Nachrichten von unbekannten Kontakten: Wir sorgen dafür, dass Du nur Nachrichten von denjenigen erhältst, die Du kennst und vertraust. Schluss mit lästigem Spam und unerwünschten Nachrichten!\n\nHimitsu macht sich stark für Deine Sicherheit und Deine Privatsphäre. Trete unserer Community bei und erlebe eine neue Dimension des sicheren und vertraulichen Chat-Erlebnisses. Willkommen bei \"Himitsu\" – wo Deine Privatsphäre geschützt und respektiert wird.\n"
+    },
+    "battery": {
+      "title": "Batterie Optimierung",
+      "content": "Um die reibungslose und ununterbrochene Navigation zu ermöglichen, während die App im Hintergrund läuft, muss die Batterie Optimierung für diese App deaktiviert werden.\nBitte erlaube uns daher, die Batterie Optimierung deines Smartphones für diese App zu deaktivieren :)",
+      "button": "Batterie Optimierung ignorieren"
+    }
+  },
   "settings": {
     "": "Einstellungen",
     "general": {
