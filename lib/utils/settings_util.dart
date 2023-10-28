@@ -534,6 +534,15 @@ const Color oekoSnow = Color(0xffffffff);
 const Color oekoBackgroundDark = Color(0xff0c0f0c);
 const Color oekoMidnight = Color(0xff181e18);
 
+const Color himitsuBlue = Colors.indigo;
+const Color himitsuPurple = Colors.deepPurple;
+
+final Color himitsuBlueLight = Colors.indigo.lighten();
+final Color himitsuPurpleLight = Colors.deepPurple.lighten();
+
+final Color himitsuBlueTrans = himitsuBlue.withOpacity(0.75);
+final Color himitsuPurpleTrans = himitsuPurple.withOpacity(0.75);
+
 /*
 const oekoPrimarySystemOverlayStyle = SystemUiOverlayStyle(
   statusBarColor: Colors.green,

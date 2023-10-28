@@ -14,6 +14,9 @@
     "gallery": "Gallery"
   },
   "introduction": {
+    "back": "Back",
+    "next": "Next",
+    "done": "Done",
     "welcome": {
       "title": "HIMITSU",
       "content": "Welcome to \"Himitsu\" - Your ultimate chat app for privacy and data security!\n\nYour safety and privacy are our top priorities. With Himitsu, you can communicate with confidence and confidentiality, without worrying about the security of your data. Our app offers you:\n\n\uD83D\uDD12 Encrypted Data Transmission: Every message you send is securely encrypted to ensure that only you and your conversation partner have access to the content.\n\n\uD83D\uDD25 Self-Destruct Button: Your privacy is in your hands. With just two simple clicks, you can not only delete the app but also all associated data from your device - giving you the utmost control over your communication.\n\n\uD83D\uDEAB No Unwanted Messages from Unknown Contacts: We ensure that you only receive messages from those you know and trust. Say goodbye to annoying spam and unwanted messages!\n\nHimitsu is dedicated to your safety and privacy. Join our community and experience a new dimension of secure and confidential chat. Welcome to \"Himitsu\" - where your privacy is protected and respected.\n"

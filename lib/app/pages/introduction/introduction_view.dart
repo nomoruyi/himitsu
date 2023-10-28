@@ -67,27 +67,20 @@ class _IntroductionViewState extends State<IntroductionView> {
       child: ColorfulSafeArea(
         topColor: Theme.of(context).cardColor,
         bottomColor: Theme.of(context).cardColor,
-        child: ValueListenableBuilder(
-          valueListenable: _permissions[0],
-          builder: (ctx, value, _) {
-            log.t('$value jsdhgjksh djkfghfjksdhjkgfhsjkdhgfujshg dfjksfh uvfdjx hg');
-
-            return Scaffold(
-              body: IntroSlider(
-                isShowSkipBtn: false,
-                // isShowDoneBtn: value == PermissionStatus.granted,
-                prevButtonStyle: ButtonStyle(textStyle: MaterialStateProperty.all<TextStyle?>(TextStyle(fontSize: TextSize.medium))),
-                nextButtonStyle: ButtonStyle(textStyle: MaterialStateProperty.all<TextStyle?>(TextStyle(fontSize: TextSize.medium))),
-                doneButtonStyle: ButtonStyle(textStyle: MaterialStateProperty.all<TextStyle?>(TextStyle(fontSize: TextSize.medium))),
-                // skipButtonStyle: ButtonStyle(textStyle: MaterialStateProperty.all<TextStyle?>(TextStyle(fontSize: TextSize.medium))),
-                backgroundColorAllTabs: Theme.of(context).primaryColor,
-                onDonePress: value == PermissionStatus.granted ? () => closeIntroduction(context) : null,
-                // onSkipPress:  () => closeIntroduction(context),
-                listCustomTabs: [const WelcomeSlide(), BatteryOptimizationSlide(_permissions[0])],
-                navigationBarConfig: NavigationBarConfig(padding: EdgeInsets.zero),
-              ),
-            );
-          },
+        child: Scaffold(
+          body: IntroSlider(
+            isShowSkipBtn: false,
+            // isShowDoneBtn: value == PermissionStatus.granted,
+            prevButtonStyle: ElevatedButton.styleFrom(textStyle: TextStyle(fontSize: TextSize.medium, color: oekoBackgroundLight)),
+            nextButtonStyle: ElevatedButton.styleFrom(textStyle: TextStyle(fontSize: TextSize.medium, color: oekoBackgroundLight)),
+            doneButtonStyle: ElevatedButton.styleFrom(textStyle: TextStyle(fontSize: TextSize.medium, color: oekoBackgroundLight)),
+            // skipButtonStyle: ButtonStyle(textStyle: MaterialStateProperty.all<TextStyle?>(TextStyle(fontSize: TextSize.medium))),
+            backgroundColorAllTabs: Theme.of(context).primaryColor,
+            onDonePress: () => closeIntroduction(context),
+            // onSkipPress:  () => closeIntroduction(context),
+            listCustomTabs: [const WelcomeSlide(), BatteryOptimizationSlide(_permissions[0])],
+            navigationBarConfig: NavigationBarConfig(padding: EdgeInsets.zero),
+          ),
         ),
       ),
     );
