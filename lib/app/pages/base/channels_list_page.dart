@@ -10,16 +10,16 @@ import 'package:himitsu_app/utils/router_util.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
-class ChannelListPage extends StatefulWidget {
-  const ChannelListPage({
-    Key? key,
-  }) : super(key: key);
+class ChannelsListPage extends StatefulWidget {
+  const ChannelsListPage({
+    super.key,
+  });
 
   @override
-  State<ChannelListPage> createState() => _ChannelListPageState();
+  State<ChannelsListPage> createState() => _ChannelsListPageState();
 }
 
-class _ChannelListPageState extends State<ChannelListPage> {
+class _ChannelsListPageState extends State<ChannelsListPage> {
   late final StreamChannelListController _listController;
 
   Future<void> _batteryOptimization() async {
@@ -89,16 +89,7 @@ class _ChannelListPageState extends State<ChannelListPage> {
           controller: _listController,
           physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
           onChannelTap: (channel) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return StreamChannel(
-                    channel: channel,
-                    child: const ChannelPage(),
-                  );
-                },
-              ),
-            );
+            context.pushNamed(Routes.channel.name, pathParameters: {'channel_id': channel.id!}, extra: channel);
           },
         ),
       ),
@@ -112,36 +103,17 @@ class _ChannelListPageState extends State<ChannelListPage> {
   }
 }
 
-class ChannelPage extends StatelessWidget {
-  const ChannelPage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: StreamChannelHeader(showTypingIndicator: true),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: StreamMessageListView(),
-          ),
-          StreamMessageInput(),
-        ],
-      ),
-    );
-  }
-
-/*  Future<void> _sendFirebaseMessage(Message message) async {
-    await FirebaseMessaging.instance.sendMessage(messageId: message.id, messageType: message.type, data: {
-      'senderId': message.user?.id ?? 'UNKNOWN USER',
-      'message': message.text ?? 'NO TEXT',
-    });
-    log.i(message);
-  }*/
-}
-
 //--------------------------------------------------------------------------------------
+/*            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return StreamChannel(
+                    channel: channel,
+                    child:  ChannelPage(channel: channel),
+                  );
+                },
+              ),
+            );*/
 
 /*
 class ChatsListPage extends StatefulWidget {

@@ -45,7 +45,7 @@ class BatteryOptimizationSlide extends StatelessWidget {
                 style: TextStyle(fontSize: TextSize.large, color: Colors.grey.shade200),
               ),
               ElevatedButton(
-                  onPressed: _requestIgnoreBatteryOptimizationPermission,
+                  onPressed: status.value == PermissionStatus.granted ? null : _requestIgnoreBatteryOptimizationPermission,
                   child: Text(
                     FlutterI18n.translate(context, 'introduction.battery.button'),
                     textAlign: TextAlign.center,

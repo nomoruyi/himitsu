@@ -121,7 +121,7 @@ class _MainViewState extends State<MainView> {
             } else if (state is ShowLoginView) {
               context.pushNamed(Routes.login.name);
             } else if (state is StartMainApp) {
-              context.pushNamed(Routes.chats.name);
+              context.pushNamed(Routes.channels_list.name);
             }
           },
           child: LoadingWidget(

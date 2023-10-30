@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HimitsuPopUp extends StatelessWidget {
-  const HimitsuPopUp({Key? key, required this.title, this.content, required this.actions}) : super(key: key);
+  const HimitsuPopUp({super.key, required this.title, this.content, required this.actions});
 
   //region VARIABLES
   final Widget title;

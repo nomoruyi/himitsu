@@ -14,7 +14,7 @@ class HimitsuAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool implyLeadingWidget;
 
   const HimitsuAppBar(
-      {Key? key,
+      {super.key,
       this.title,
       this.height = 56,
       this.leading,
@@ -22,8 +22,7 @@ class HimitsuAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.tabBar,
       this.roundedBorder = true,
       this.centerTitle = false,
-      this.implyLeadingWidget = true})
-      : super(key: key);
+      this.implyLeadingWidget = true});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +45,7 @@ class HimitsuAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 //region Icon-Buttons
 class HimitsuSettingsIconButton extends StatelessWidget {
-  const HimitsuSettingsIconButton({Key? key}) : super(key: key);
+  const HimitsuSettingsIconButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -61,14 +60,13 @@ class HimitsuSettingsIconButton extends StatelessWidget {
 }
 
 class HimitsuSortIconButton extends StatelessWidget {
-  // final TourBloc tourBloc;
   final int tourId;
-// final void Function() refresh;
+
   const HimitsuSortIconButton({
-    Key? key,
+    super.key,
     required this.tourId,
     /*required this.refresh*/
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +84,7 @@ class HimitsuSortIconButton extends StatelessWidget {
 class HimitsuSearchIconButton extends StatelessWidget {
   final SearchDelegate delegate;
 
-  const HimitsuSearchIconButton({Key? key, required this.delegate}) : super(key: key);
+  const HimitsuSearchIconButton({super.key, required this.delegate});
 
   @override
   Widget build(BuildContext context) {
@@ -102,8 +100,8 @@ class HimitsuSearchIconButton extends StatelessWidget {
 class HimitsuMenuButton extends StatelessWidget {
   const HimitsuMenuButton(
     this.handleClick, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Future<void> Function(String value) handleClick;
 
@@ -143,12 +141,12 @@ class HimitsuMenuButton extends StatelessWidget {
 
 class CustomPopupMenuItem<T> extends PopupMenuItem<T> {
   const CustomPopupMenuItem({
-    Key? key,
-    required T value,
-    bool enabled = true,
-    required Widget child,
+    super.key,
+    required T super.value,
+    super.enabled,
+    required Widget super.child,
     this.color,
-  }) : super(key: key, value: value, enabled: enabled, child: child);
+  });
 
   final Color? color;
 

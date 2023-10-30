@@ -4,7 +4,7 @@ import 'package:himitsu_app/utils/settings_util.dart';
 
 class HimitsuTextField extends StatelessWidget {
   const HimitsuTextField({
-    Key? key,
+    super.key,
     this.initialValue,
     required this.controller,
     this.obscureText = false,
@@ -23,7 +23,7 @@ class HimitsuTextField extends StatelessWidget {
     this.contentPadding = const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
     this.enabled = true,
     this.textOverflow = TextOverflow.ellipsis,
-  }) : super(key: key);
+  });
 
   //region VARIABLES
   final String? initialValue;
@@ -137,7 +137,7 @@ class HimitsuTextField extends StatelessWidget {
 }
 
 class SwitchVisibilityIconButton extends StatelessWidget {
-  const SwitchVisibilityIconButton({Key? key, required this.onPressed, required this.value, this.size = 24}) : super(key: key);
+  const SwitchVisibilityIconButton({super.key, required this.onPressed, required this.value, this.size = 24});
 
   final void Function() onPressed;
   final bool value;

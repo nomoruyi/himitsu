@@ -16,14 +16,14 @@ class UserAdapter extends TypeAdapter<User> {
       role: fields[1] as String?,
       name: fields[1] as String?,
       image: fields[3] as String?,
-      createdAt: fields[3] as DateTime?,
-      updatedAt: fields[3] as DateTime?,
-      lastActive: fields[3] as DateTime?,
-      extraData: fields[3] as Map<String, Object?>,
-      online: fields[3] as bool,
-      banExpires: fields[3] as DateTime?,
-      teams: fields[3] as List<String>,
-      language: fields[3] as String?,
+      createdAt: fields[4] as DateTime?,
+      updatedAt: fields[5] as DateTime?,
+      lastActive: fields[6] as DateTime?,
+      extraData: (fields[7] as Map).cast<String, Object?>(),
+      online: fields[8] as bool,
+      banExpires: fields[9] as DateTime?,
+      teams: fields[10] as List<String>,
+      language: fields[11] as String?,
     );
   }
 

@@ -6,17 +6,20 @@ import 'package:go_router/go_router.dart';
 import 'package:himitsu_app/app/app.dart';
 import 'package:himitsu_app/app/pages/auth/license_view.dart';
 import 'package:himitsu_app/app/pages/auth/login_view.dart';
-import 'package:himitsu_app/app/pages/base/chats_view.dart';
-import 'package:himitsu_app/app/pages/base/create_channel_view.dart';
+import 'package:himitsu_app/app/pages/base/channel_page.dart';
+import 'package:himitsu_app/app/pages/base/channels_list_page.dart';
+import 'package:himitsu_app/app/pages/base/create_channel_page.dart';
 import 'package:himitsu_app/app/pages/introduction/introduction_view.dart';
 import 'package:himitsu_app/utils/settings_util.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 enum Routes {
   home,
   introduction,
   license,
   login,
-  chats,
+  channels_list,
+  channel,
   settings,
   status,
   versionsProtocol,
@@ -53,11 +56,16 @@ final GoRouter router = GoRouter(
           path: Routes.login.name,
           builder: (context, state) => const LoginView(),
         ),
-        GoRoute(name: Routes.chats.name, path: Routes.chats.name, builder: (context, state) => const ChannelListPage(), routes: [
+        GoRoute(name: Routes.channels_list.name, path: Routes.channels_list.name, builder: (context, state) => const ChannelsListPage(), routes: [
           GoRoute(
             name: Routes.createChannel.name,
             path: Routes.createChannel.name,
             builder: (context, state) => const CreateChannelView(),
+          ),
+          GoRoute(
+            name: Routes.channel.name,
+            path: '${Routes.channel.name}/:channel_id',
+            builder: (context, state) => ChannelPage(channel: state.extra as Channel),
           ),
         ]),
       ],
@@ -98,7 +106,7 @@ Widget _buildSlideTransition(BuildContext context, Animation<double> animation, 
 }
 
 class ErrorScreen extends StatelessWidget {
-  const ErrorScreen({Key? key}) : super(key: key);
+  const ErrorScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

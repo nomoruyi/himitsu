@@ -18,8 +18,8 @@ Future<void> main() async {
   HomeWidget.registerBackgroundCallback(backgroundCallback);
   HomeWidget.widgetClicked.listen(backgroundCallback);
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
-  await HiveUtil.init();
 
+  await HiveUtil.init();
   await ClientUtil.init();
 
   await FirebaseUtil.init();

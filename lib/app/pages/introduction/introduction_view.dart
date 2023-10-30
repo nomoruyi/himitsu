@@ -14,7 +14,7 @@ part 'slides/slide_battery.dart';
 part 'slides/slide_welcome.dart';
 
 class IntroductionView extends StatefulWidget {
-  const IntroductionView({Key? key}) : super(key: key);
+  const IntroductionView({super.key});
 
   @override
   State<IntroductionView> createState() => _IntroductionViewState();
@@ -25,14 +25,11 @@ class _IntroductionViewState extends State<IntroductionView> {
   final ValueNotifier<int> _currentIndex = ValueNotifier(0);
 
   //region METHODS
-  Future<void> closeIntroduction(BuildContext context) async {
-    AuthData? authData = AuthService.authBox.get('authData');
+  Future<void> _closeIntroduction(BuildContext context) async {
+    AuthData? authData = AuthService.authBox.get('auth');
 
-    authData ??= AuthData();
-    authData.firstInitialization = false;
-    AuthService.authBox.put('authData', authData);
-
-    context.pushNamed(Routes.home.name);
+    authData ??= AuthData(firstInitialization: false);
+    AuthService.authBox.put('auth', authData).then((value) => context.pushNamed(Routes.home.name));
   }
 
   bool _allPermissionsGranted() {
@@ -76,7 +73,7 @@ class _IntroductionViewState extends State<IntroductionView> {
             doneButtonStyle: ElevatedButton.styleFrom(textStyle: TextStyle(fontSize: TextSize.medium, color: oekoBackgroundLight)),
             // skipButtonStyle: ButtonStyle(textStyle: MaterialStateProperty.all<TextStyle?>(TextStyle(fontSize: TextSize.medium))),
             backgroundColorAllTabs: Theme.of(context).primaryColor,
-            onDonePress: () => closeIntroduction(context),
+            onDonePress: () => _closeIntroduction(context),
             // onSkipPress:  () => closeIntroduction(context),
             listCustomTabs: [const WelcomeSlide(), BatteryOptimizationSlide(_permissions[0])],
             navigationBarConfig: NavigationBarConfig(padding: EdgeInsets.zero),
@@ -86,8 +83,8 @@ class _IntroductionViewState extends State<IntroductionView> {
     );
   }
 
-  //region WIDGETS
-  /*
+//region WIDGETS
+/*
  Widget _buildFirstSlide() {
     return Scaffold(
       body: Center(

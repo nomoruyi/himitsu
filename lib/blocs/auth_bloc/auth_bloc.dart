@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:himitsu_app/backend/auth_service/auth_service.dart';
 import 'package:himitsu_app/models/auth_data_model.dart';
+import 'package:himitsu_app/utils/env_util.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -23,10 +24,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onInitialization(InitializeApp event, Emitter<AuthState> emit) async {
-    AuthData? authData = authBox.get('authData');
+    AuthData? authData = authBox.get('auth');
+
+    log.f(authData?.firstInitialization);
 
     if (authData == null || authData.firstInitialization) {
-      authData = AuthData(firstInitialization: true);
+      authData = AuthData(firstInitialization: false);
       authBox.add(authData);
 
       emit(ShowIntroductionSlides());

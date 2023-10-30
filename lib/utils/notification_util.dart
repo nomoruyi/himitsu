@@ -46,7 +46,7 @@ abstract class NotificationUtil {
         channelDescription: androidChannel?.description,
         // icon: android.smallIcon,
         importance: androidChannel!.importance,
-        priority: Priority.high
+        priority: Priority.max
         // other properties...
         );
     DarwinNotificationDetails iosDetails = const DarwinNotificationDetails();
@@ -78,6 +78,7 @@ abstract class NotificationUtil {
     handleMessage(RemoteMessage(data: data));
   }
 
+  @pragma('vm:entry-point')
   static void setForegroundNotificationListener() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       log.i('FOREGROUND NOTIFICATION RECEIVED');
@@ -92,6 +93,7 @@ abstract class NotificationUtil {
     });
   }
 
+  @pragma('vm:entry-point')
   static void setBackgroundNotificationListener() async {
     // FirebaseMessaging.onBackgroundMessage((message) {});
 
@@ -103,6 +105,7 @@ abstract class NotificationUtil {
     });
   }
 
+  @pragma('vm:entry-point')
   static void setTerminatedNotificationListener() async {
     FirebaseMessaging.instance.getInitialMessage().then((initialMessage) {
       if (initialMessage != null) {
@@ -146,7 +149,7 @@ abstract class NotificationUtil {
   }
 
   static bool isForCurrentDevice(RemoteMessage message) {
-    AuthData? authData = AuthService.authBox.get('authData');
+    AuthData? authData = AuthService.authBox.get('auth');
     String? receiverId = message.data['receiver_id'];
 
     if (authData == null) return false;

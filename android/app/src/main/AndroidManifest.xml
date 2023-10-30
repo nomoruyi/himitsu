@@ -15,7 +15,11 @@
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:label="Himitsu">
+        android:label="Himitsu"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+
+    >
 
         <activity
                 android:name="himitsu_app.MainActivity"

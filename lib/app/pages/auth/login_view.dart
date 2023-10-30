@@ -12,7 +12,7 @@ import 'package:himitsu_app/utils/utils.export.dart';
 import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({Key? key}) : super(key: key);
+  const LoginView({super.key});
 
   @override
   State<LoginView> createState() => _LoginViewState();

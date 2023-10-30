@@ -8,7 +8,7 @@ import 'package:himitsu_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:himitsu_app/utils/utils.export.dart';
 
 class LicenseView extends StatefulWidget {
-  const LicenseView({Key? key}) : super(key: key);
+  const LicenseView({super.key});
 
   @override
   State<LicenseView> createState() => _LicenseViewState();

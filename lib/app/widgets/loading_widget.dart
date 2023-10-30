@@ -6,7 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 class LoadingWidget extends StatelessWidget {
   final Widget? child;
 
-  const LoadingWidget({Key? key, this.child}) : super(key: key);
+  const LoadingWidget({super.key, this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +33,11 @@ class GlassMorphism extends StatelessWidget {
   // final double end;
 
   const GlassMorphism({
-    Key? key,
+    super.key,
     this.child,
     // required this.start,
     // required this.end,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
