@@ -5,7 +5,6 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:go_router/go_router.dart';
 import 'package:himitsu_app/backend/auth_service/auth_service.dart';
 import 'package:himitsu_app/models/auth_data_model.dart';
-import 'package:himitsu_app/utils/env_util.dart';
 import 'package:himitsu_app/utils/utils.export.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -26,10 +25,11 @@ class _IntroductionViewState extends State<IntroductionView> {
 
   //region METHODS
   Future<void> _closeIntroduction(BuildContext context) async {
-    AuthData? authData = AuthService.authBox.get('auth');
+    AuthData authData = AuthService.authBox.get(HiveBox.auth.name)!;
 
-    authData ??= AuthData(firstInitialization: false);
-    AuthService.authBox.put('auth', authData).then((value) => context.pushNamed(Routes.home.name));
+    authData.firstInitialization = false;
+
+    authData.save().then((value) => context.pushNamed(Routes.home.name));
   }
 
   bool _allPermissionsGranted() {

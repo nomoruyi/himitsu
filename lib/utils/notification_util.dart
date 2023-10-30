@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:himitsu_app/backend/auth_service/auth_service.dart';
 import 'package:himitsu_app/models/auth_data_model.dart';
-import 'package:himitsu_app/utils/client_util.dart';
-import 'package:himitsu_app/utils/env_util.dart';
+import 'package:himitsu_app/utils/utils.export.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 abstract class NotificationUtil {
@@ -122,9 +121,11 @@ abstract class NotificationUtil {
   @pragma('vm:entry-point')
   static Future<void> handleMessage(RemoteMessage message) async {
     // String userId = message.data['id'];
+    AuthData authData = AuthService.authBox.get(HiveBox.auth.name)!;
+
     ClientUtil.client.connectUser(
-      ClientUtil.user,
-      ClientUtil.token,
+      authData.user!,
+      authData.token!,
       connectWebSocket: false,
     );
 
@@ -133,15 +134,24 @@ abstract class NotificationUtil {
     final Map<String, dynamic> data = message.data;
 
     final String messageId = data['id'];
+
     final GetMessageResponse response = await ClientUtil.client.getMessage(messageId);
+    final String? receiverPublikKey = response.message.user?.extraData['publicKey'] as String?;
+
+    String messageText = response.message.text ?? '';
+
+    if (receiverPublikKey != null) {
+      final List<int> deriveKey = await CryptUtil.deriveKey(authData.keyPair!.privateKey, receiverPublikKey);
+      messageText = await CryptUtil.decryptMessage(messageText, deriveKey);
+    }
 
     if (flutterLocalNotificationsPlugin == null) {
       await init();
     }
 
     flutterLocalNotificationsPlugin!.show(
-        1, 'Nachricht von ${response.message.user?.name} in ${response.channel?.name}', response.message.text, generalNotificationDetails,
-        payload: message.data.toString());
+        1, 'Nachricht von ${response.message.user?.name} in ${response.channel?.name}', messageText, generalNotificationDetails,
+        payload: messageText);
 
     // navigatorKey.currentState?.pushNamed(route, arguments: {'id': int.parse(message.data['id'])});
 
@@ -149,7 +159,7 @@ abstract class NotificationUtil {
   }
 
   static bool isForCurrentDevice(RemoteMessage message) {
-    AuthData? authData = AuthService.authBox.get('auth');
+    AuthData? authData = AuthService.authBox.get(HiveBox.auth.name);
     String? receiverId = message.data['receiver_id'];
 
     if (authData == null) return false;
