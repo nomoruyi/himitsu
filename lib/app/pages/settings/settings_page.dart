@@ -1,6 +1,7 @@
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:go_router/go_router.dart';
 import 'package:himitsu_app/app/widgets/app_bar_widget.dart';
@@ -53,6 +54,17 @@ class _SettingsPageState extends State<SettingsPage> {
               title: Text(FlutterI18n.translate(context, 'settings.general.'),
                   style: TextStyle(fontSize: TextSize.large, color: Theme.of(context).primaryColor)),
               tiles: [
+                SettingsTile(
+                  title: Text(
+                    FlutterI18n.translate(context, 'settings.general.userId.').toUpperCase(),
+                    style: TextStyle(fontSize: TextSize.large),
+                  ),
+                  trailing: InkWell(
+                    onLongPress: () => Clipboard.setData(ClipboardData(text: ClientUtil.user.id)).then((value) =>
+                        FlushbarUtil.success(context, message: FlutterI18n.translate(context, 'settings.general.userId.notification')).show(context)),
+                    child: Text(ClientUtil.user.id, style: TextStyle(fontSize: TextSize.large, fontWeight: FontWeight.bold)),
+                  ),
+                ),
                 SettingsTile(
                   title: Text(FlutterI18n.translate(context, 'settings.general.language.'), style: TextStyle(fontSize: TextSize.medium)),
                   trailing: _buildLanguageSelection(),

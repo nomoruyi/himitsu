@@ -31,6 +31,10 @@
     "": "Einstellungen",
     "general": {
       "": "Allgemeines",
+      "userId": {
+        "": "Deine Nutzer ID",
+        "notification": "Nutzer ID kopiert"
+      },
       "language": {
         "": "Sprache",
         "german": "Deutsch",
