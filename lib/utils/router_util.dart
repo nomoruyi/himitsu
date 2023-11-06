@@ -6,10 +6,11 @@ import 'package:go_router/go_router.dart';
 import 'package:himitsu_app/app/app.dart';
 import 'package:himitsu_app/app/pages/auth/license_view.dart';
 import 'package:himitsu_app/app/pages/auth/login_view.dart';
-import 'package:himitsu_app/app/pages/base/channel_page.dart';
+import 'package:himitsu_app/app/pages/base/channel/channel_page.dart';
+import 'package:himitsu_app/app/pages/base/channel/create_channel_page.dart';
 import 'package:himitsu_app/app/pages/base/channels_list_page.dart';
-import 'package:himitsu_app/app/pages/base/create_channel_page.dart';
 import 'package:himitsu_app/app/pages/introduction/introduction_view.dart';
+import 'package:himitsu_app/app/pages/settings/settings_page.dart';
 import 'package:himitsu_app/utils/settings_util.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
@@ -56,18 +57,24 @@ final GoRouter router = GoRouter(
           path: Routes.login.name,
           builder: (context, state) => const LoginView(),
         ),
-        GoRoute(name: Routes.channels_list.name, path: Routes.channels_list.name, builder: (context, state) => const ChannelsListPage(), routes: [
-          GoRoute(
-            name: Routes.createChannel.name,
-            path: Routes.createChannel.name,
-            builder: (context, state) => const CreateChannelView(),
-          ),
-          GoRoute(
-            name: Routes.channel.name,
-            path: '${Routes.channel.name}/:channel_id',
-            builder: (context, state) => ChannelPage(channel: state.extra as Channel),
-          ),
-        ]),
+        GoRoute(
+          name: Routes.channels_list.name,
+          path: Routes.channels_list.name,
+          builder: (context, state) => const ChannelsListPage(),
+          routes: [
+            GoRoute(
+              name: Routes.createChannel.name,
+              path: Routes.createChannel.name,
+              builder: (context, state) => const CreateChannelView(),
+            ),
+            GoRoute(
+              name: Routes.channel.name,
+              path: '${Routes.channel.name}/:channel_id',
+              builder: (context, state) => ChannelPage(channel: state.extra as Channel),
+            ),
+          ],
+        ),
+        GoRoute(name: Routes.settings.name, path: Routes.settings.name, builder: (context, state) => const SettingsPage())
       ],
     ),
   ],

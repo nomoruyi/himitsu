@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:himitsu_app/models/crypt_model.dart';
-import 'package:himitsu_app/utils/env_util.dart';
 import 'package:webcrypto/webcrypto.dart';
 
 class CryptUtil {
   // The "iv" stands for initialization vector (IV). To ensure the encryption’s strength,
 // each encryption process must use a random and distinct IV.
 // It’s included in the message so that the decryption procedure can use it.
-  static final Uint8List iv = Uint8List.fromList(env.initVector.codeUnits);
+  static final Uint8List iv = Uint8List.fromList('Sheesh'.codeUnits);
+  // static final Uint8List iv = Uint8List.fromList(env.initVector.codeUnits);
 
   static Future<JSONCryptKeyPair> generateKeys() async {
     final keyPair = await EcdhPrivateKey.generateKey(EllipticCurve.p256);

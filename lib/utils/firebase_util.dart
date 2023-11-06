@@ -28,6 +28,10 @@ abstract class FirebaseUtil {
 
     EmptyResponse emptyResponse = await ClientUtil.client.addDevice(token, PushProvider.firebase, pushProviderName: 'himitsu-firebase');
 
+    FirebaseMessaging.instance.onTokenRefresh.listen((token) {
+      ClientUtil.client.addDevice(token, PushProvider.firebase);
+    });
+
     FirebaseMessaging.onBackgroundMessage(NotificationUtil.handleMessage);
 
     log.i('Token saved: ${emptyResponse.duration}');

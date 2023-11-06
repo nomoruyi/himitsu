@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:himitsu_app/main.dart';
 import 'package:himitsu_app/utils/client_util.dart';
-import 'package:himitsu_app/utils/env_util.dart';
 import 'package:himitsu_app/utils/router_util.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
@@ -74,8 +73,8 @@ class _ChannelsListPageState extends State<ChannelsListPage> {
                 ),
               ),
               child: InkWell(
-                onLongPress: () => log.i('open menu'),
-                onDoubleTap: () => log.i('delete all data?'),
+                onTap: () => context.pushNamed(Routes.settings.name),
+                onLongPress: deleteApp,
                 borderRadius: const BorderRadius.all(Radius.circular(16.0)),
               ),
             ),

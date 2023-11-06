@@ -62,7 +62,12 @@ class HimitsuApp extends StatelessWidget {
               theme: oekoLightTheme,
               darkTheme: oekoDarkTheme,
               themeMode: settingsProvider.theme,
-              builder: (ctx, child) => StreamChat(client: ClientUtil.client, child: child),
+              builder: (ctx, child) => StreamChat(
+                client: ClientUtil.client,
+                // onBackgroundEventReceived: NotificationUtil.streamBackgroundHandler,
+                backgroundKeepAlive: const Duration(hours: 1),
+                child: child,
+              ),
             ),
           ),
         );

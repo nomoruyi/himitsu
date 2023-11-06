@@ -50,6 +50,7 @@ class BuildEnvironment {
   late final String apiKey;
   late final String initVector;
 
+  late final PackageInfo info;
   late final Map<String, dynamic> deviceData;
 
   BuildEnvironment._init({required this.flavor});
@@ -63,6 +64,8 @@ class BuildEnvironment {
   }
 
   static Future<void> _setVariables(BuildFlavor environment) async {
+    _env.info = await PackageInfo.fromPlatform();
+
     DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
     _env.apiKey = dotenv.env['STREAM_API_KEY']!;
     _env.initVector = dotenv.env['INIT_VECTOR']!;

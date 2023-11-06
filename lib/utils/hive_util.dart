@@ -31,7 +31,6 @@ abstract class HiveUtil {
     Hive.registerAdapter(JSONCryptKeyPairAdapter());
     Hive.registerAdapter(UserAdapter());
     Hive.registerAdapter(AuthDataAdapter());
-    // Hive.registerAdapter(UserAdapter());
 
     await Hive.openBox<JSONCryptKeyPair>(HiveBox.crypt.name);
     await Hive.openBox<User>(HiveBox.user.name);

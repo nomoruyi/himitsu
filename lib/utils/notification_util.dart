@@ -79,16 +79,16 @@ abstract class NotificationUtil {
 
   @pragma('vm:entry-point')
   static void setForegroundNotificationListener() {
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       log.i('FOREGROUND NOTIFICATION RECEIVED');
       log.i('Message data: ${message.data}');
 
       // If `onMessage` is triggered with a notification, construct our own
       // local notification to show to users using the created channel.
 
-      if (!isForCurrentDevice(message)) return;
+      // if (!isForCurrentDevice(message)) return;
 
-      handleMessage(message);
+      await handleMessage(message);
     });
   }
 
@@ -96,66 +96,78 @@ abstract class NotificationUtil {
   static void setBackgroundNotificationListener() async {
     // FirebaseMessaging.onBackgroundMessage((message) {});
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       log.i('BACKGROUND NOTIFICATION RECEIVED');
       log.i('Message data: ${message.data}');
 
-      handleMessage(message);
+      await handleMessage(message);
     });
   }
 
   @pragma('vm:entry-point')
   static void setTerminatedNotificationListener() async {
-    FirebaseMessaging.instance.getInitialMessage().then((initialMessage) {
+    FirebaseMessaging.instance.getInitialMessage().then((initialMessage) async {
       if (initialMessage != null) {
         log.i('TERMINATED NOTIFICATION RECEIVED');
         log.i(initialMessage);
 
-        handleMessage(initialMessage);
+        await handleMessage(initialMessage);
       }
     }).onError((error, stackTrace) {
       throw Exception(stackTrace.toString());
     });
   }
 
+  static Future<void> streamBackgroundHandler(Event event) async {
+    log.f('Event type: ${event.type}');
+
+    if (event.type == 'message.new') {
+      RemoteMessage message = RemoteMessage(senderId: event.message?.user?.id);
+      await handleMessage(message);
+    }
+  }
+
   @pragma('vm:entry-point')
   static Future<void> handleMessage(RemoteMessage message) async {
-    // String userId = message.data['id'];
-    AuthData authData = AuthService.authBox.get(HiveBox.auth.name)!;
+    // await HiveUtil.init();
+    // AuthData authData = AuthService.authBox.get(HiveBox.auth.name)!;
+    await BuildEnvironment.init(flavor: BuildFlavor.production);
 
-    ClientUtil.client.connectUser(
-      authData.user!,
-      authData.token!,
-      connectWebSocket: false,
-    );
+    try {
+      // await ClientUtil.persistenceClient.connect(ClientUtil.user.id);
 
-    log.w('MESSAGE RECEIVED');
+      await ClientUtil.client.connectUser(
+        ClientUtil.user,
+        ClientUtil.token,
+        connectWebSocket: false,
+      );
 
-    final Map<String, dynamic> data = message.data;
+      log.w('MESSAGE RECEIVED');
 
-    final String messageId = data['id'];
+      final Map<String, dynamic> data = message.data;
 
-    final GetMessageResponse response = await ClientUtil.client.getMessage(messageId);
-    final String? receiverPublikKey = response.message.user?.extraData['publicKey'] as String?;
+      final String messageId = data['id'];
 
-    String messageText = response.message.text ?? '';
+      final GetMessageResponse response = await ClientUtil.client.getMessage(messageId);
+      // final String? receiverPublikKey = response.message.user?.extraData['publicKey'] as String?;
 
-    if (receiverPublikKey != null) {
+      String messageText = response.message.text ?? '';
+
+      /*   if (receiverPublikKey != null) {
       final List<int> deriveKey = await CryptUtil.deriveKey(authData.keyPair!.privateKey, receiverPublikKey);
       messageText = await CryptUtil.decryptMessage(messageText, deriveKey);
     }
+*/
+      if (flutterLocalNotificationsPlugin == null) {
+        await init();
+      }
 
-    if (flutterLocalNotificationsPlugin == null) {
-      await init();
+      flutterLocalNotificationsPlugin!.show(
+          1, 'Nachricht von ${response.message.user?.name} in ${response.channel?.name}', messageText, generalNotificationDetails,
+          payload: messageText);
+    } catch (e) {
+      log.f(e);
     }
-
-    flutterLocalNotificationsPlugin!.show(
-        1, 'Nachricht von ${response.message.user?.name} in ${response.channel?.name}', messageText, generalNotificationDetails,
-        payload: messageText);
-
-    // navigatorKey.currentState?.pushNamed(route, arguments: {'id': int.parse(message.data['id'])});
-
-    // log.d('Push successful');
   }
 
   static bool isForCurrentDevice(RemoteMessage message) {
