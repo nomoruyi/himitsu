@@ -675,5 +675,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-
-himitsu-firebase-credentials-5c0a58b41622.json
+!/himitsu-firebase-credentials-5c0a58b41622.json
+!/lib/app/pages/introduction/_old_introduction_view.dart
